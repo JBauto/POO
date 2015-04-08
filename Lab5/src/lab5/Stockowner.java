@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 public class Stockowner {
 	private String name;
-	private HashMap<String,Integer> shares;
+	private HashMap<String,Shares> shares;
 	
 	public void Init_HashMap(){
-		shares = new HashMap<String, Integer>();
+		shares = new HashMap<String, Shares>();
 	}
-	public HashMap<String,Integer> getShares(){
+	public HashMap<String,Shares> getShares(){
 		return shares;
 	}
 	public String getName(){
@@ -20,42 +20,59 @@ public class Stockowner {
 	}
 	public void buyShare(int amount, String corp, Stockmarket x){
 		int rem_shares;
-		int owner_shares;
-		HashMap<String,Integer> stock;
+		Shares owner_shares;
+		Shares tmp = new Shares();
+		Shares tmp2 = new Shares();
+		HashMap<String,Shares> stock;
 		stock = x.getStock();
-		int totalshares = stock.get(corp);
-		rem_shares = totalshares - amount;
+		Shares totalshares = stock.get(corp);
+		rem_shares = totalshares.getAmount() - amount;
 		if(rem_shares <0){
-			stock.put(corp, 0);
+			stock.put(corp, tmp);
 			if(shares.containsKey(corp)){
 				owner_shares = shares.get(corp);
-				shares.put(corp, owner_shares + rem_shares);	
+				tmp2.setAmount(owner_shares.getAmount() + rem_shares);
+				shares.put(corp, tmp2);	
 			}else{
-				shares.put(corp, rem_shares);
+				tmp2.setAmount(rem_shares);
+				shares.put(corp, tmp2);
 			}
 		}else{
-			stock.put(corp, rem_shares);
+			tmp.setAmount(rem_shares);
+			stock.put(corp, tmp);
 			if(shares.containsKey(corp)){
 				owner_shares = shares.get(corp);
-				shares.put(corp, owner_shares + amount);
+				tmp2.setAmount(owner_shares.getAmount() + amount);
+				shares.put(corp, tmp2);
 			}else{
-				shares.put(corp, amount);
+				tmp2.setAmount(rem_shares);
+				shares.put(corp, tmp2);
 			}
 		}
 	}
+	@Override
+	public String toString() {
+		return "Stockowner [name=" + name + ", shares=" + shares + "]";
+	}
 	public void sellShare(int amount, String corp, Stockowner x){	
-		int owner_shares;
-		HashMap<String,Integer> stock;
+		Shares owner_shares;
+		HashMap<String,Shares> stock;
 		stock = x.getShares();
-		int totalshares = stock.get(corp);
+		Shares tmp = new Shares();
+		Shares tmp2 = new Shares();
+		Shares totalshares = stock.get(corp);
 		if(shares.containsKey(corp)){
 			owner_shares = shares.get(corp);
-			if(amount > owner_shares){
-				stock.put(corp, totalshares + owner_shares);
-				shares.put(corp, 0);
+			if(amount > owner_shares.getAmount()){
+				tmp.setAmount(totalshares.getAmount() + owner_shares.getAmount());
+				stock.put(corp, tmp);
+				tmp2.setAmount(0);
+				shares.put(corp, tmp2);
 			}else{
-				stock.put(corp, totalshares + amount);
-				shares.put(corp, owner_shares - amount);
+				tmp.setAmount(totalshares.getAmount() + amount);
+				stock.put(corp, tmp);
+				tmp2.setAmount(owner_shares.getAmount() - amount);
+				shares.put(corp, tmp2);
 			}	
 		}else{
 			System.out.println("You dont have shares of " + corp);

@@ -4,14 +4,16 @@ import java.util.HashMap;
 
 public class Stockmarket {
 	
-	public HashMap<String,Integer> stock;
+	public HashMap<String,Shares> stock;
 	
 	public Stockmarket(){
-		stock = new HashMap<String, Integer>();
+		stock = new HashMap<String, Shares>();
 	}
 	
 	public void addCorporation(int amount,String corp){
-		stock.put(corp, amount);
+		Shares tmp = new Shares();
+		tmp.setAmount(amount);
+		stock.put(corp, tmp);
 	}
 
 	public void removeCorporation(String corp){
@@ -19,7 +21,9 @@ public class Stockmarket {
 	}
 
 	private void updateCorporation(int amount, String corp){
-		stock.put(corp, amount);
+		Shares tmp = new Shares();
+		tmp.setAmount(amount);
+		stock.put(corp, tmp);
 	}
 	
 	/*public void buyShare(int amount, String corp, Stockowner x){
@@ -67,7 +71,7 @@ public class Stockmarket {
 		}		
 	}*/
 	
-	public HashMap<String,Integer> getStock(){
+	public HashMap<String,Shares> getStock(){
 		return stock;
 	}
 
