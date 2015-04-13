@@ -7,14 +7,8 @@ public class Lab2 {
 	private int length = 0;
 
 	boolean associateLab1(Lab1 obj){
-		int i = 0, j = 0,m = 0;
-		while(i<10) {
-			if(labs1[i] == null){
-				break;
-			}
-			i++;
-		}
-		j = i;
+		int i = 0, j = 0;
+
 		for(i=0; i<labs1.length; i++){			
 			if(labs1[i] != null){
 				if(labs1[i].equals(obj)){
@@ -24,17 +18,14 @@ public class Lab2 {
 					continue;
 				}
 			}else{
-				m = 1;
-				labs1[i] = obj;
-				length = i;
 				break;
-			}			
+			}
 		}
-		if(j < 10 && (i == labs1.length) && m == 0){
-			labs1[j] = obj;
-			length = j;
+		if(i!=labs1.length){
+			labs1[i] = obj;
+			length = i;
 		}
-		System.out.println("Length = " + length + " @ Position = "+j);
+		System.out.println("Length = " + length + " @ Position = "+i);
 		if(length > 10){
 			System.out.println("Trying to associate more than 10 objects!");
 			System.exit(2);

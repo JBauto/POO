@@ -36,7 +36,7 @@ public class Main {
 						cond++;
 						System.out.println("Added");
 					}
-					if(cond == 9){
+					if(cond == 10){
 						System.out.println("Found it: " + labs2 + " after " + k + " interation(s) with condition = " + cond);
 						System.exit(3);
 					}
