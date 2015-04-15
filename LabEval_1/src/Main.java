@@ -22,22 +22,21 @@ public class Main {
 			Lab1[] labs1 = new Lab1[parameter*10];
 			for(i=0; i<parameter; i++){
 				labs2[i] = new Lab2();
-				System.out.println(labs2);
+				//System.out.println(labs2);
 			}
 			for(i=0; i<parameter*10; i++){
 				labs1[i] = new Lab1(numero.nextInt(10), 0);
-				System.out.println(labs1[i]);
+				//System.out.println(labs1[i]);
 			}
 			for(i=0; i<parameter; i++){
-				for(j=0; j<=10 ; j++ ){
-					System.out.println("(I,J) = ("+i+","+j+")" +"  "+ "[x="+labs1[m].x+", y="+labs1[m].y+"]");
+				for(j=0; j<10 ; j++ ){
+					//System.out.println("(I,J) = ("+i+","+j+")" +"  "+ "[x="+labs1[m].x+", y="+labs1[m].y+"]");
 					tmp = labs2[i].associateLab1(labs1[m]);
 					if(tmp == true ){
 						cond++;
-						System.out.println("Added");
 					}
 					if(cond == 10){
-						System.out.println("Found it: " + labs2 + " after " + k + " interation(s) with condition = " + cond);
+						System.out.println("Found it: after " + k + " interation(s) with condition = " + cond + "\n"+ labs2[i]);
 						System.exit(3);
 					}
 				if(m == parameter*10 - 1) break;
@@ -47,7 +46,7 @@ public class Main {
 				m = 0;
 			}
 			k++;
-			System.out.println("Iteração: "+k);
+			//System.out.println("Iteração: "+k);
 		}
 	}
 }
