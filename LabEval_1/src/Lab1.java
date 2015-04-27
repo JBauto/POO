@@ -14,7 +14,7 @@ public class Lab1 {
 			return false;
 		return true;
 	}
-
+///
 	@Override
 	public String toString() {
 		return "Lab1 [x=" + x + ", y=" + y + "]";
