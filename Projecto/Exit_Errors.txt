@@ -1,0 +1,1 @@
+-1 = Tentou se mudar o tempo de uma variavel quando ele ja tinha sido atribuido
