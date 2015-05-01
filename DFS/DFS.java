@@ -1,26 +1,35 @@
 package DFS;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
 import java.util.Stack;
 
-
-public class DFS {
+public class REQ {
 	private int[][] graph;
 	private int dim;
 	private Stack<Integer> stack;
 
-	DFS(int[][] graph) {
+	REQ(int[][] graph) {
 		dim = graph.length;
 		this.graph = graph;
 		stack = new Stack<Integer>();
 	}
 
 	public boolean GraphCycle() {
-		int i;
+		int i, j, count;
+		for (j = 0; j < dim; j++) {
+			count = 0;
+			for (i = 0; i < dim; i++) {
+				if (graph[i][j] == 1)
+					count++;
+				if (count == 4) {
+					System.out.println("Too many Parents");
+					return false;
+				}
+			}
+		}
+
 		for (i = 0; i < dim; i++) {
 			if (FindCycle(graph, i)) {
-				System.out.println("Cycle" +" "+ i);
+				System.out.println("Cycle" + " " + i);
 				return true;
 			}
 		}
@@ -63,16 +72,12 @@ public class DFS {
 	}
 
 	public static void main(String... arg) {
-		int yolo [][]={{0,1,0,0,0,0,0,0},
-					   {0,0,1,1,1,0,0},
-					   {0,0,0,0,0,1,0},
-					   {0,0,0,0,1,0,0},
-					   {0,0,0,0,1,0,1},
-					   {0,0,0,0,0,1,0},
-					   {0,0,0,0,0,0,1},
-					   {0,0,0,0,0,0,0}
-	   };
-		DFS teste = new DFS(yolo);
+		int yolo[][] = { { 0, 1, 0, 0, 1 }, 
+					     { 0, 0, 0, 0, 0 },
+						 { 1, 1, 0, 1 , 1 },
+						 { 0, 0, 0, 0, 0 },
+						 { 0, 0, 0, 0, 0 } };
+		REQ teste = new REQ(yolo);
 		teste.GraphCycle();
 	}
 }
