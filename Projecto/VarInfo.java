@@ -26,6 +26,10 @@ public class VarInfo {
 		}
 	}
 	
+	public Integer getElement(Integer x){
+		return var_data.get(x);
+	}
+		
 	@Override
 	public String toString() {
 		return "VarInfo [var_data=" + var_data + ", size=" + size + ", time="
