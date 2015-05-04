@@ -4,13 +4,13 @@ import java.util.Stack;
 
 public class REQ {
 	private Stack<Integer> stack;
-	int dim;
-	public boolean GetParents(int [][] graph, int col) {
+	int row,col;
+	public boolean GetParents(int [][] graph, int son) {
 		int i, count=0;
-		dim=graph.length;
-
-		for (i = 0; i < dim; i++) {
-			if (graph[i][col] == 1)
+		row=graph.length;
+		col=graph[0].length;
+		for (i = 0; i < row; i++) {
+			if (graph[i][son] == 1)
 				count++;
 				if (count == 3) {
 					return true;
@@ -22,7 +22,7 @@ public class REQ {
 	public boolean FindCycle(int[][] matrix, int start) {
 		stack = new Stack<Integer>();
 		
-		int visited[] = new int[dim];
+		int visited[] = new int[col];
 		int node = start;
 		int finish = start;
 		visited[start] = 1;
@@ -32,7 +32,7 @@ public class REQ {
 			node = stack.peek();
 			finish = node;
 
-			while (finish < dim) {
+			while (finish < col) {
 				if (matrix[node][finish] == 1 && visited[finish] == 1) {
 					if (stack.contains(finish)) {
 						return true;
@@ -54,15 +54,18 @@ public class REQ {
 		return false;
 	}
 
-	public static void main(String... arg) {
-		int yolo[][] = { { 0, 0, 0, 0, 0, 0 }, 
-						 { 0, 0, 0, 0, 0, 0 },
-						 { 0, 0, 0, 1, 0, 0 },
-						 { 0, 0, 0, 1, 0, 0 },
-						 { 0, 0, 0, 1, 0, 0 },
-						 { 0, 0, 0, 0, 0, 0 }};
+	public static void main(String[] arg) {
+		int yolo[][] = {{ 1, 1, 0}, 
+						{ 0, 1, 0}, 
+						{ 0, 0, 0}, 
+						{ 0, 1, 0}, 
+						{ 0, 0, 1}, 
+						{ 1, 0, 0}};
+						
+ 
+	
 		REQ teste = new REQ ();
-		if(teste.GetParents(yolo,3)){
+		if(teste.GetParents(yolo,1)){
 			System.out.println("3 parents");
 		}else{
 			System.out.println("<3 parents");
