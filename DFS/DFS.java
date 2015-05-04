@@ -3,42 +3,25 @@ package DFS;
 import java.util.Stack;
 
 public class REQ {
-	private int[][] graph;
-	private int dim;
 	private Stack<Integer> stack;
-
-	REQ(int[][] graph) {
-		dim = graph.length;
-		this.graph = graph;
-		stack = new Stack<Integer>();
-	}
-
-	public boolean GraphCycle() {
-		int i, j, count;
-		for (j = 0; j < dim; j++) {
-			count = 0;
-			for (i = 0; i < dim; i++) {
-				if (graph[i][j] == 1)
-					count++;
-				if (count == 4) {
-					System.out.println("Too many Parents");
-					return false;
-				}
-			}
-		}
+	int dim;
+	public boolean GetParents(int [][] graph, int col) {
+		int i, count=0;
+		dim=graph.length;
 
 		for (i = 0; i < dim; i++) {
-			if (FindCycle(graph, i)) {
-				System.out.println("Cycle" + " " + i);
-				return true;
+			if (graph[i][col] == 1)
+				count++;
+				if (count == 3) {
+					return true;
+				}
 			}
-		}
-		System.out.println("Not Cycle");
 		return false;
 	}
 
-	private boolean FindCycle(int[][] matrix, int start) {
-
+	public boolean FindCycle(int[][] matrix, int start) {
+		stack = new Stack<Integer>();
+		
 		int visited[] = new int[dim];
 		int node = start;
 		int finish = start;
@@ -72,12 +55,23 @@ public class REQ {
 	}
 
 	public static void main(String... arg) {
-		int yolo[][] = { { 0, 1, 0, 0, 1 }, 
-					     { 0, 0, 0, 0, 0 },
-						 { 1, 1, 0, 1 , 1 },
-						 { 0, 0, 0, 0, 0 },
-						 { 0, 0, 0, 0, 0 } };
-		REQ teste = new REQ(yolo);
-		teste.GraphCycle();
+		int yolo[][] = { { 0, 0, 0, 0, 0, 0 }, 
+						 { 0, 0, 0, 0, 0, 0 },
+						 { 0, 0, 0, 1, 0, 0 },
+						 { 0, 0, 0, 1, 0, 0 },
+						 { 0, 0, 0, 1, 0, 0 },
+						 { 0, 0, 0, 0, 0, 0 }};
+		REQ teste = new REQ ();
+		if(teste.GetParents(yolo,3)){
+			System.out.println("3 parents");
+		}else{
+			System.out.println("<3 parents");
+		}
+		if(teste.FindCycle(yolo,0)){
+			System.out.println("Its Cycle");
+		}else{
+			System.out.println("Not Cycle");
+
+		}
 	}
 }
