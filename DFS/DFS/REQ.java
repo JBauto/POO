@@ -24,26 +24,27 @@ public class REQ {
 		
 		int visited[] = new int[col];
 		int node = start;
-		int finish = start;
-		visited[start] = 1;
+		int finish = 0;
+		if (start>=col)
+			visited[correctindex(start)] = 1;
 		stack.push(start);
 
 		while (!stack.isEmpty()) {
 			node = stack.peek();
-			finish = node;
+			finish = 0;
 
 			while (finish < col) {
 				if (matrix[node][finish] == 1 && visited[finish] == 1) {
-					if (stack.contains(finish)) {
+					if (stack.contains(correctindex(finish))) {
 						return true;
 					}
 				}
 				if (matrix[node][finish] == 1 && visited[finish] == 0) {
-					stack.push(finish);
+					stack.push(correctindex(finish));
 					visited[finish] = 1;
 					matrix[node][finish] = 0;
-					node = finish;
-					finish = 1;
+					node = correctindex(finish);
+					finish = 0;
 					continue;
 				}
 				finish++;
@@ -53,24 +54,33 @@ public class REQ {
 
 		return false;
 	}
-
+	private int	correctindex (int i){
+		if (i < col) {
+			return i+col;
+		}else{
+			return i-col;
+		}
+	}
 	public static void main(String[] arg) {
-		int yolo[][] = {{ 1, 1, 0}, 
-						{ 0, 1, 0}, 
-						{ 0, 0, 0}, 
-						{ 0, 1, 0}, 
-						{ 0, 0, 1}, 
-						{ 1, 0, 0}};
+		int yolo[][] = {{ 0, 1, 0, 1}, 
+						{ 0, 0, 0, 0}, 
+						{ 1, 0, 0, 0}, 
+						{ 0, 0, 0, 0}, 
+						{ 0, 0, 0, 1}, 
+						{ 0, 0, 1, 0},
+						{ 1, 0, 0, 0}, 
+						{ 0, 0, 1, 0}
+						};
 						
  
 	
 		REQ teste = new REQ ();
-		if(teste.GetParents(yolo,1)){
+		if(teste.GetParents(yolo,0)){
 			System.out.println("3 parents");
 		}else{
 			System.out.println("<3 parents");
 		}
-		if(teste.FindCycle(yolo,0)){
+		if(teste.FindCycle(yolo,3)){
 			System.out.println("Its Cycle");
 		}else{
 			System.out.println("Not Cycle");
