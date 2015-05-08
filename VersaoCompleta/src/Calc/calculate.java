@@ -8,11 +8,11 @@ import java.util.List;
 public class calculate {
 
 
-	public List<Integer>  indexesToCompare (int [][] mat_adj, int ind_son){ // o primeiro valor é o seu index, e os outros vêm por ordem inversa, ou seja, se o elemento 2 tem como pai 3 e 5, devolve: 1 4 2
+	public List<Integer>  indexesToCompare (int [][] mat_adj, int ind_son, int n){ // o primeiro valor é o seu index, e os outros vêm por ordem inversa, ou seja, se o elemento 2 tem como pai 3 e 5, devolve: 1 4 2
 		int i;
 		List<Integer> ind_parents = new ArrayList<Integer>();
 		
-		ind_parents.add(ind_son);
+		ind_parents.add(ind_son+n);
 		
 		for(i=mat_adj.length-1;i>-1;i--){ //de notar que mat_adj é semque quadrada logo o lenght é igual ao nr de colunas (e linhas)
 			if (mat_adj[i][ind_son] == 1){

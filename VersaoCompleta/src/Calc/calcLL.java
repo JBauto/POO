@@ -1,5 +1,6 @@
 package Calc;
 
+import java.util.ArrayList;
 //import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,17 @@ public class calcLL extends calculate {
 	public double LL(int [][] Data, int [][] mat_adj, int [] r){
 		int i, j, n, k;
 		double Nij, Nijk, score=0;
+		List<Integer> index_parents = new ArrayList<Integer>();
 		
 		for(n=0;n<r.length;n++){
-			List<Integer> index_parents = indexesToCompare(mat_adj, n);
+			
+			 if (n<(r.length)/2) {
+				 index_parents.add(n);
+			 }else {
+				 index_parents = indexesToCompare(mat_adj, n-(r.length)/2, r.length/2);
+				 
+			 }
+			
 			j = getq(index_parents, r);
 			for(i=0;i<j+1;i++){
 				List<Integer> values_compare =  valuesToCompare ( r, n, i, 0, index_parents ); //no valor de k vai 0, porque ainda nao o sabemos mas ele nao vai ser preciso, melhor soluçao?
@@ -28,7 +37,7 @@ public class calcLL extends calculate {
 			}
 		
 		}
-		return Math.abs(score);
+		return score;
 	}
 	
 }

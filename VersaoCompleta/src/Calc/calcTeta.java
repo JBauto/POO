@@ -12,7 +12,7 @@ public class calcTeta extends calculate {
 
 		
 		for(n=0;n<r.length;n++){
-			List<Integer> index_parents = indexesToCompare(mat_adj, n);		
+			List<Integer> index_parents = indexesToCompare(mat_adj, n, r.length/2);		
 			j = getq(index_parents, r);
 			l = lengthTeta(index_parents, r);
 			double[] tetas = new double[l];
