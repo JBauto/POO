@@ -1,9 +1,12 @@
 package Grafo;
 
+import Calc.*;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 
+import Calc.calcLL;
 import DFS.REQ;
 import Files.*;
 
@@ -36,10 +39,16 @@ public class Main_grafo {
 		r[1]= r[3] = 3;
 		*/
 		REQ req = new REQ ();
+		calcLL scll = new calcLL();
+		calcMDL scmdl = new calcMDL();
 		
 		int [][] mat1= new int[r.length][(r.length)/2],mat2= new int[r.length][(r.length)/2];
-		/*
+		//int [][] mat3= new int[r.length][(r.length)/2];
 		int [][] mat_cycle= new int[r.length][(r.length)/2];
+		
+		//mat3[0][0] = mat3[0][1] = mat3[0][2] = mat3[1][0] = mat3[2][1]= mat3[2][2] = mat3[3][1]= mat3[3][2] =1;
+		//System.out.println("Mat3 LL com score:" + scll.LL(Data, mat3, r));
+		
 		
 		Random rand = new Random();
 		
@@ -73,13 +82,13 @@ public class Main_grafo {
 			if (k==0) break;
 		}
 
-		*/
+		//System.out.println(Arrays.deepToString(Data));
 		
 		
 		mat1=graph.createGrafo(Data, r, 0, mat1);
 		mat2=graph.createGrafo(Data, r, 1, mat2);
 
-		System.out.println("Mat1:");
+		System.out.println("Mat1 LL com score:" + scll.LL(Data, mat1, r));
 		
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
@@ -88,7 +97,7 @@ public class Main_grafo {
 			System.out.println();
 		}
 		
-		System.out.println("Mat2:");
+		System.out.println("Mat2 MDL com score:" + scmdl.MDL(Data, mat2, r));
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
 			System.out.print(mat2[i][j] + " ");

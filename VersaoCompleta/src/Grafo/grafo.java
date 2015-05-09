@@ -29,7 +29,7 @@ public class grafo {
 						mat_adj_test = operator.add(mat_adj_max, i, j);
 						
 						score_test = scll.LL(Data, mat_adj_test, r);
-						System.out.println((i+1) + " is now a parent of " + (j+1) + " SCORE: " +score_test + " SCORE VIZ MAX "+ score_viz_max);
+						//System.out.println((i+1) + " is now a parent of " + (j+1) + " SCORE: " +score_test + " SCORE VIZ MAX "+ score_viz_max);
 						if (score_test>score_viz_max) {
 							score_viz_max = score_test;
 							for(int l =0; l<mat_adj_test.length;l++){
@@ -63,7 +63,7 @@ public class grafo {
 				}
 				
 				System.out.println("SCOREviz MAX apos remoçoes: " + score_viz_max);
-				
+				/*
 				for (i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){
 					System.out.print(mat_adj_max[i][j] + " ");
@@ -71,7 +71,7 @@ public class grafo {
 					System.out.println();
 				}
 				System.out.println();
-				
+				*/
 				for(i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){ // todos os flips possiveis, para o exemplo ele nunca vai fazer
 						mat_adj_test = operator.flip(mat_adj_max, i, j);
@@ -134,7 +134,7 @@ public class grafo {
 						mat_adj_test = operator.add(mat_adj_max, i, j);
 						
 						score_test = scmdl.MDL(Data, mat_adj_test, r);
-						System.out.println((i+1) + " is now a parent of " + (j+1) + " SCORE MDL: " +score_test + " SCORE VIZ MAX "+ score_viz_max);
+						//System.out.println((i+1) + " is now a parent of " + (j+1) + " SCORE MDL: " +score_test + " SCORE VIZ MAX "+ score_viz_max);
 						if (score_test>score_viz_max) {
 							score_viz_max = score_test;
 							for(int l =0; l<mat_adj_test.length;l++){
@@ -199,12 +199,6 @@ public class grafo {
 					
 					
 				} else {
-					for (i=0;i<r.length;i++){
-						for (j=0;j<(r.length)/2;j++){
-						System.out.print(mat_adj_max[i][j] + " ");
-						}
-						System.out.println();
-					}
 					return mat_adj_max;
 				}
 			}	
