@@ -61,30 +61,4 @@ public class REQ {
 			return i-col;
 		}
 	}
-	public static void main(String[] arg) {
-		int yolo[][] = {{ 0, 1, 0, 1}, 
-						{ 0, 0, 0, 0}, 
-						{ 1, 0, 0, 0}, 
-						{ 0, 0, 0, 0}, 
-						{ 0, 0, 0, 1}, 
-						{ 0, 0, 1, 0},
-						{ 1, 0, 0, 0}, 
-						{ 0, 0, 1, 0}
-						};
-						
- 
-	
-		REQ teste = new REQ ();
-		if(teste.GetParents(yolo,0)){
-			System.out.println("3 parents");
-		}else{
-			System.out.println("<3 parents");
-		}
-		if(teste.FindCycle(yolo,3)){
-			System.out.println("Its Cycle");
-		}else{
-			System.out.println("Not Cycle");
-
-		}
-	}
 }

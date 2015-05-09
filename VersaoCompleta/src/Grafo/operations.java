@@ -23,7 +23,7 @@ public class operations {
 		
 		if (mat_adj_ini[parent][son]==0) {
 			mat_adj_ini[parent][son]=1;
-			System.out.println((parent+1) + " is now a parent of " + (son+1));
+			//System.out.println((parent+1) + " is now a parent of " + (son+1));
 		
 		} else return mat_adj;
 		//else //System.out.println((parent+1) + "already is a parent of " + (son+1));
@@ -77,7 +77,7 @@ public class operations {
 				System.out.println();*/
 				return mat_adj_ini;
 			}else {
-				System.out.println((parent+1) + " is not parent of " + (son+1));
+				//System.out.println((parent+1) + " is not parent of " + (son+1));
 				return mat_adj;
 			}
 					
@@ -103,6 +103,7 @@ public class operations {
 				mat_adj_ini[i][j] = mat_adj[i][j];
 			}
 		}
+		/*
 		System.out.println("Antes do flip:");
 		for (int i=0;i<mat_adj.length;i++){
 			for (int j=0;j<(mat_adj[0].length);j++){
@@ -112,7 +113,7 @@ public class operations {
 		}
 		
 		System.out.println();
-		
+		*/
 		if (mat_adj_ini[parent][son]==1) {
 			mat_adj_ini[son+n][parent-n]=1;
 			mat_adj_ini[parent][son]=0;
@@ -125,7 +126,7 @@ public class operations {
 		}
 		
 		if(req.FindCycle(mat_cycle, son)) return mat_adj; //ve se é DAG
-		
+		/*
 		System.out.println("Depois do flip e de ver se ciclica:");
 		for (int i=0;i<mat_adj.length;i++){
 			for (int j=0;j<(mat_adj[0].length);j++){
@@ -135,7 +136,7 @@ public class operations {
 		}
 		
 		System.out.println();
-		
+		*/
 		return mat_adj_ini;
 	}
 

@@ -1,7 +1,10 @@
 package Calc;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+//import DFS.REQ;
 
 
 
@@ -28,14 +31,23 @@ public class calculate {
 	}
 	
 	public int getq (List<Integer> ind_parents, int [] r){ // assume que j pode ser zero, ou seja, se houver 2 possibilidades fica j=0 ou j=1 (como no exemplo dos apontamentos), e nao j=1 ou j=2 (como no exemplo do enunciado)
-		int j=0,i, ji;
+		int j=0,i = 0, ji;
 		
 		if(ind_parents.size()==1)return j; //nao tem pais
 		
 		j=r[ind_parents.get(1)]-1;// o indice ta ao contrario (começa pelo ultimo pai) mas j final, que é o que interessa, deve ser igual independentemente da ordem
 		
-		for(i=2;i<ind_parents.size();i++){ //passa o primeiro da lista que é ele proprio, ver apontamentos da professora		
-			ji=(j+1)*(r[ind_parents.get(i)]-1);//esquisito mas bate certo para os que testei ate agora
+		Iterator<Integer> it = ind_parents.iterator();
+		Iterator<Integer> it2;
+		
+		do{ 
+			it.next();
+			i++;
+		}while(i<2);
+		
+		for(it2=it;it2.hasNext();){ //passa o primeiro da lista que é ele proprio, ver apontamentos da professora		
+			int poss_parent = it2.next();
+			ji=(j+1)*(r[poss_parent]-1);//esquisito mas bate certo para os que testei ate agora
 			j=j+ji;
 		}
 		
@@ -45,35 +57,41 @@ public class calculate {
 	public List<Integer>  valuesToCompare (int [] r, int ind_son, int j, int k, List<Integer> ind_parents ){ //na minha cabeça funciona, ta um bocado confuso, por testar!!
 		List<Integer> values = new ArrayList<Integer>();  //ind_son nao parece ser preciso
 		int nr_parents =ind_parents.size() -1;
-		int l;
+		int l = 1;
 		
 		values.add(k);
 		
 		if (nr_parents==0) return values;
 		
+		Iterator<Integer> it = ind_parents.iterator();
+		it.hasNext();
+		int poss_parent = it.next();
+		Iterator<Integer> it2;
 		
-		for(l=1;l<nr_parents;l++){ // quanto temos j e queremos j1, j2 etc, ver apontamentos da professora, mete primeiro o do ultimo pai
-			values.add(j%r[ind_parents.get(l)]);
-			j=(j-(j%r[ind_parents.get(l)]))/(r[ind_parents.get(l)]);
-			
+		for(it2 = it;l<nr_parents;l++){ // quanto temos j e queremos j1, j2 etc, ver apontamentos da professora, mete primeiro o do ultimo pai
+			poss_parent = it2.next();
+			values.add(j%r[poss_parent]);
+			j=(j-(j%r[poss_parent]))/(r[poss_parent]);
 		}
-	
-			values.add(j%r[ind_parents.get(l)]); //por testar!!! (mais que um pai)
+			poss_parent = it2.next();
+			values.add(j%r[poss_parent]); //por testar!!! (mais que um pai)
 		
 		return values;
 	}
 	
 	public int countNijk (int [][] Data, List<Integer> index_compare, List<Integer> values_compare){
-		int Nijk=0, i, j, equal;
+		int Nijk=0, i, equal;
 		
 		for(i=0; i< Data.length; i++){
 			equal=0;
-			for(j=0; j<index_compare.size(); j++){
-				
-				if(Data[i][index_compare.get(j)]==values_compare.get(j)) equal++;
+			Iterator<Integer> it2 = values_compare.iterator();
+			for(Iterator<Integer> it = index_compare.iterator(); it.hasNext();){
+				int i_compare = it.next();
+				int v_compare = it2.next();
+				if(Data[i][i_compare] == v_compare) equal++;
 				
 			}
-			if(index_compare.size()==equal)Nijk++;
+			if(index_compare.size()==equal) Nijk++;
 			
 		}
 		
@@ -82,14 +100,21 @@ public class calculate {
 	}
 	
 	public int countNij (int [][] Data, List<Integer> index_compare, List<Integer> values_compare){ //provavel que esteja mal
-		int Nij=0, i, j, t;
+		int Nij=0, i, t;
 		
 		if(index_compare.size()==1)return Data.length;
 		
 		for(i=0; i< Data.length; i++){
 			t=0;
-			for(j=1; j<index_compare.size(); j++){		//passa ele proprio	
-				if(Data[i][index_compare.get(j)]==values_compare.get(j)) t++;			
+			Iterator<Integer> it2 = values_compare.iterator();
+			Iterator<Integer> it = index_compare.iterator();
+			@SuppressWarnings("unused")
+			int tmp = it.next();
+			tmp = it2.next();
+			for(;it.hasNext();){		//passa ele proprio	
+				int i_compare = it.next();
+				int v_compare = it2.next();
+				if(Data[i][i_compare] == v_compare) t++;			
 			}
 			if (t==index_compare.size()-1) Nij++;
 		}

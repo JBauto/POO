@@ -25,10 +25,10 @@ public class calcMDL extends calcLL {
 			if (n<(r.length)/2) {
 				 index_parents.add(n);
 			 }else {
-				 index_parents = indexesToCompare(mat_adj, n-(r.length)/2, r.length/2);
+				 index_parents =  calc.indexesToCompare(mat_adj, n-(r.length)/2, r.length/2);
 				 
 			 }
-			q = getq (index_parents, r);
+			q =  calc.getq (index_parents, r);
 			B = B + (r[n]-1)*(q+1);
 		}
 		

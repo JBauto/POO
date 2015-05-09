@@ -24,6 +24,7 @@ public class grafo {
 				double score_viz_max=scll.LL(Data, mat_adj_vizm, r);
 				
 				for(i=0;i<r.length;i++){
+					
 					for (j=0;j<(r.length)/2;j++){ // todas as adiçoes possiveis
 						
 						mat_adj_test = operator.add(mat_adj_max, i, j);
@@ -35,15 +36,13 @@ public class grafo {
 							for(int l =0; l<mat_adj_test.length;l++){
 								for (int k=0;k<(r.length)/2;k++){
 									mat_adj_vizm[l][k] = mat_adj_test[l][k];
-									}
-								
-							}
-							
+									}								
+								}							
 							}
 						}
 					}
 				
-				System.out.println("SCOREviz MAX apos adiçoes: " + score_viz_max);
+				//System.out.println("SCOREviz MAX apos adiçoes: " + score_viz_max);
 				
 				for(i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){ // todas as subtracçoes possiveis 
@@ -62,7 +61,7 @@ public class grafo {
 					}
 				}
 				
-				System.out.println("SCOREviz MAX apos remoçoes: " + score_viz_max);
+				//System.out.println("SCOREviz MAX apos remoçoes: " + score_viz_max);
 				/*
 				for (i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){
@@ -87,9 +86,9 @@ public class grafo {
 							}
 					}
 				}
-				System.out.println("SCOREviz MAX apos flips: " + score_viz_max);
+				//System.out.println("SCOREviz MAX apos flips: " + score_viz_max);
 				
-				System.out.println("SCOREviz MAX " + score_viz_max + " SCORE MAX actual " + score_max);
+				//System.out.println("SCOREviz MAX " + score_viz_max + " SCORE MAX actual " + score_max);
 				
 				if(score_viz_max > score_max){ //se o viz for maior que o max actual
 					score_max = score_viz_max;
@@ -102,12 +101,12 @@ public class grafo {
 					
 					
 				} else {
-					for (i=0;i<r.length;i++){
+					/*for (i=0;i<r.length;i++){
 						for (j=0;j<(r.length)/2;j++){
 						System.out.print(mat_adj_max[i][j] + " ");
 						}
 						System.out.println();
-					}
+					}*/
 					return mat_adj_max;
 				}
 				
@@ -148,7 +147,7 @@ public class grafo {
 						}
 					}
 				
-				System.out.println("SCOREviz MDL MAX apos adiçoes: " + score_viz_max);
+				//System.out.println("SCOREviz MDL MAX apos adiçoes: " + score_viz_max);
 				
 				for(i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){ // todas as subtracçoes possiveis 
@@ -167,7 +166,7 @@ public class grafo {
 					}
 				}
 				
-				System.out.println("SCOREviz MDL MAX apos remoçoes: " + score_viz_max);
+				//System.out.println("SCOREviz MDL MAX apos remoçoes: " + score_viz_max);
 				
 				for(i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){ // todos os flips possiveis, para o exemplo ele nunca vai fazer
@@ -184,9 +183,9 @@ public class grafo {
 							}
 					}
 				}
-				System.out.println("SCOREviz MDL MAX apos flips: " + score_viz_max);
+				//System.out.println("SCOREviz MDL MAX apos flips: " + score_viz_max);
 				
-				System.out.println("SCOREviz MDL MAX " + score_viz_max + " SCORE MAX actual " + score_max);
+				//System.out.println("SCOREviz MDL MAX " + score_viz_max + " SCORE MAX actual " + score_max);
 				
 				if(score_viz_max > score_max){ //se o viz for maior que o max actual
 					score_max = score_viz_max;

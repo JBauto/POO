@@ -3,7 +3,7 @@ package Grafo;
 import Calc.*;
 
 import java.io.IOException;
-import java.util.Arrays;
+
 import java.util.Random;
 
 import Calc.calcLL;
@@ -14,6 +14,9 @@ public class Main_grafo {
 
 	public static void main(String[] args) throws IOException {
 
+		
+	    long startTime = System.currentTimeMillis();
+		
 		grafo graph = new grafo();
 		Train teste = new Train();		
 		teste.readTrain("train-data.csv");	
@@ -48,7 +51,7 @@ public class Main_grafo {
 		
 		//mat3[0][0] = mat3[0][1] = mat3[0][2] = mat3[1][0] = mat3[2][1]= mat3[2][2] = mat3[3][1]= mat3[3][2] =1;
 		//System.out.println("Mat3 LL com score:" + scll.LL(Data, mat3, r));
-		
+	
 		
 		Random rand = new Random();
 		
@@ -105,7 +108,10 @@ public class Main_grafo {
 			System.out.println();
 		}
 		
-
+		
+		long stopTime = System.currentTimeMillis();
+	    long elapsedTime = stopTime - startTime;
+	    System.out.println("Execution Time : "+elapsedTime+" ms");	
 	}
 
 }
