@@ -11,13 +11,12 @@ public class grafo {
 		double score_max, score_test;
 		operations operator = new operations();
 		
-		
+
 		if(type_score==0){
 			
 			calcLL scll = new calcLL();
 			
 			score_max=scll.LL(Data, mat_adj_max, r);
-			
 			while(true){ // enquanto existir um vizinho com score mais alto que mat_adj_max ou outro criterio de paragem
 						 // pode ser melhor um do while por causa do 1º caso
 				
@@ -37,8 +36,10 @@ public class grafo {
 								for (int k=0;k<(r.length)/2;k++){
 									mat_adj_vizm[l][k] = mat_adj_test[l][k];
 									}								
-								}							
+								}
+							
 							}
+							
 						}
 					}
 				

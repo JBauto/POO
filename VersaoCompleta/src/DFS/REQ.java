@@ -4,6 +4,9 @@ import java.util.Stack;
 
 public class REQ {
 	private Stack<Integer> stack;
+	
+	public long time;
+	
 	int row,col;
 	public boolean GetParents(int [][] graph, int son) {
 		int i, count=0;
@@ -21,6 +24,8 @@ public class REQ {
 
 	public boolean FindCycle(int[][] matrix, int start) {
 		stack = new Stack<Integer>();
+		
+		long tstart = System.nanoTime();
 		
 		int visited[] = new int[col];
 		int node = start;
@@ -51,7 +56,8 @@ public class REQ {
 			}
 			stack.pop();
 		}
-
+		long tend = System.nanoTime();
+		time = time +(tend-tstart);
 		return false;
 	}
 	private int	correctindex (int i){

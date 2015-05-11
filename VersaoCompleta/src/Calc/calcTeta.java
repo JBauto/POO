@@ -36,7 +36,7 @@ public class calcTeta  {
 					
 					Tijk = (Nijk+0.5)/(Nij+0.5*r[n]);
 					
-					System.out.println("Tijk: " + Tijk);
+					//System.out.println("Tijk: " + Tijk);
 					tetas[t]=Tijk;
 					t++;
 				}
