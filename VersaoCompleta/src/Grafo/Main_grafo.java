@@ -22,6 +22,7 @@ public class Main_grafo {
 		teste.readTrain("train-data.csv");	
 		int i,j;
 		int Data[][] = teste.matrix_data;
+		int nr_rdm = 10;
 				
 				/*{{ 1, 1, 1, 0 },
 						{ 1 ,0, 0, 1 },
@@ -44,70 +45,124 @@ public class Main_grafo {
 		REQ req = new REQ ();
 		calcLL scll = new calcLL();
 		calcMDL scmdl = new calcMDL();
+		//calcTeta tt = new calcTeta();
 		
-		int [][] mat1= new int[r.length][(r.length)/2],mat2= new int[r.length][(r.length)/2];
+		int [][] mat2= new int[r.length][(r.length)/2];
 		//int [][] mat3= new int[r.length][(r.length)/2];
 		int [][] mat_cycle= new int[r.length][(r.length)/2];
+		int [][] mat_maxll= new int[r.length][(r.length)/2];
+		int [][] mat_maxmdl= new int[r.length][(r.length)/2];
+		double score_llmax, score_mdlmax, score_ll, score_mdl;
 		
+		score_llmax = scll.LL(Data, mat_maxll, r);
+		score_mdlmax = scmdl.MDL(Data, mat_maxmdl, r);
 		//mat3[0][0] = mat3[0][1] = mat3[0][2] = mat3[1][0] = mat3[2][1]= mat3[2][2] = mat3[3][1]= mat3[3][2] =1;
 		//System.out.println("Mat3 LL com score:" + scll.LL(Data, mat3, r));
 	
 		
 		Random rand = new Random();
 		
-		
-		
-		while(true){
+		for(int rd =0; rd< nr_rdm; rd++){
+				int [][] mat1= new int[r.length][(r.length)/2];
+			while(true){
+				
+				int k=0;
+				
+				for (i=0;i < mat1.length/2;i++){
+					for(j=0;j<mat1[0].length ;j++){
+						mat1[i][j]= rand.nextInt(2);
+					}
+				}
 			
-			int k=0;
+				for( i =0; i<mat1.length;i++){
+					for( j=0; j<mat1[0].length;j++){
+						mat_cycle[i][j] = mat1[i][j];
+					}
+				}
+				for( i =0; i<mat1.length/2;i++){
+					 for (j=0; j<mat1[0].length;j++){
+						 if ( req.GetParents(mat_cycle, j) ) k++;
+					 }
+					 if (  req.FindCycle(mat_cycle,i)) k++;
+				}
+				
+				if (k==0) 	break;
+	
+			}
+	
+			//System.out.println(Arrays.deepToString(Data));
+			for (i=0;i < mat1.length/2;i++){
+						for(j=0;j<mat1[0].length;j++){
+							mat2[i][j]= mat1[i][j];
+						}
+					}
 			
-			for (i=0;i < mat1.length;i++){
-				for(j=0;j<mat1[0].length;j++){
-					mat1[i][j]= rand.nextInt(2);
+			mat1=graph.createGrafo(Data, r, 0, mat1);
+			mat2=graph.createGrafo(Data, r, 1, mat2);
+			
+			score_ll = scll.LL(Data, mat1, r);
+			
+			if(score_ll > score_llmax){
+				score_llmax=score_ll;
+				for( i =0; i<mat1.length;i++){
+					for( j=0; j<mat1[0].length;j++){
+						mat_maxll[i][j] = mat1[i][j];
+					}
 				}
 			}
-			for (i=0;i < mat1.length;i++){
-				for(j=0;j<mat1[0].length;j++){
-					mat2[i][j]= mat1[i][j];
+	/*
+			System.out.println("Mat1 LL com score:" + scll.LL(Data, mat1, r));
+			
+			for (i=0;i<r.length;i++){
+				for (j=0;j<(r.length)/2;j++){
+				System.out.print(mat1[i][j] + " ");
+				}
+				System.out.println();
+			}
+	*/		
+			
+			score_mdl = scmdl.MDL(Data, mat2, r);
+			
+			if(score_mdl > score_mdlmax){
+				score_mdlmax=score_mdl;
+				for( i =0; i<mat2.length;i++){
+					for( j=0; j<mat2[0].length;j++){
+						mat_maxmdl[i][j] = mat2[i][j];
+					}
 				}
 			}
-			for( i =0; i<mat1.length;i++){
-				for( j=0; j<mat1[0].length;j++){
-					mat_cycle[i][j] = mat1[i][j];
+			/*
+			System.out.println("Mat2 MDL com score:" + scmdl.MDL(Data, mat2, r));
+			for (i=0;i<r.length;i++){
+				for (j=0;j<(r.length)/2;j++){
+				System.out.print(mat2[i][j] + " ");
 				}
+				System.out.println();
 			}
-			for( i =0; i<mat1.length;i++){
-				 for (j=0; j<mat1[0].length;j++){
-					 if ( req.GetParents(mat_cycle, j) ) k++;
-				 }
-				 if (  req.FindCycle(mat_cycle,i)) k++;
-			}
-			if (k==0) break;
+			
+			*/
+		
 		}
-
-		//System.out.println(Arrays.deepToString(Data));
 		
 		
-		mat1=graph.createGrafo(Data, r, 0, mat1);
-		mat2=graph.createGrafo(Data, r, 1, mat2);
-
-		System.out.println("Mat1 LL com score:" + scll.LL(Data, mat1, r));
+		System.out.println("Mat LL com score:" + score_llmax);
 		
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
-			System.out.print(mat1[i][j] + " ");
+			System.out.print(mat_maxll[i][j] + " ");
 			}
 			System.out.println();
 		}
 		
-		System.out.println("Mat2 MDL com score:" + scmdl.MDL(Data, mat2, r));
+		System.out.println("Mat MDL com score:" + score_mdlmax);
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
-			System.out.print(mat2[i][j] + " ");
+			System.out.print(mat_maxmdl[i][j] + " ");
 			}
 			System.out.println();
 		}
 		
+		//tt.tetas(Data, mat1, r);
 		
 		long stopTime = System.currentTimeMillis();
 	    long elapsedTime = stopTime - startTime;

@@ -14,7 +14,15 @@ public class calcTeta  {
 
 		
 		for(n=0;n<r.length;n++){
-			List<Integer> index_parents = calc.indexesToCompare(mat_adj, n, r.length/2);		
+			List<Integer> index_parents = new ArrayList<Integer>();
+			if (n<(r.length)/2) {
+				 index_parents.add(n);
+			 }else {
+				 index_parents = calc.indexesToCompare(mat_adj, n-(r.length)/2, r.length/2);
+				 
+			 }
+			
+			
 			j = calc.getq(index_parents, r);
 			l = lengthTeta(index_parents, r);
 			double[] tetas = new double[l];
