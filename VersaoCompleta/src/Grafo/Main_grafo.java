@@ -20,8 +20,10 @@ public class Main_grafo {
 	    long startTime = System.currentTimeMillis();
 		
 		grafo graph = new grafo();
-		Train teste = new Train();		
+		Train teste = new Train();
+		Test file = new Test();
 		teste.readTrain("train-data.csv");	
+		file.readTest("test-data.csv");
 		int i,j;
 		int Data[][] = teste.matrix_data;
 		int nr_rdm = 1;
