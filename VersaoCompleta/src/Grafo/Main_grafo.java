@@ -26,7 +26,7 @@ public class Main_grafo {
 		file.readTest("test-data.csv");
 		int i,j;
 		int Data[][] = teste.matrix_data;
-		int nr_rdm = 1;
+		int nr_rdm = 10;
 				
 				/*{{ 1, 1, 1, 0 },
 						{ 1 ,0, 0, 1 },
@@ -73,7 +73,7 @@ public class Main_grafo {
 				
 				int k=0;
 				
-				for (i=0;i < mat1.length/2;i++){
+				for (i=0;i < mat1.length;i++){
 					for(j=0;j<mat1[0].length ;j++){
 						mat1[i][j]= rand.nextInt(2);
 					}
@@ -84,7 +84,7 @@ public class Main_grafo {
 						mat_cycle[i][j] = mat1[i][j];
 					}
 				}
-				for( i =0; i<mat1.length/2;i++){
+				for( i =0; i<mat1.length;i++){
 					 for (j=0; j<mat1[0].length;j++){
 						 if ( req.GetParents(mat_cycle, j) ) k++;
 					 }
@@ -97,7 +97,7 @@ public class Main_grafo {
 			}
 	
 			//System.out.println(Arrays.deepToString(Data));
-			for (i=0;i < mat1.length/2;i++){
+			for (i=0;i < mat1.length;i++){
 						for(j=0;j<mat1[0].length;j++){
 							mat2[i][j]= mat1[i][j];
 						}

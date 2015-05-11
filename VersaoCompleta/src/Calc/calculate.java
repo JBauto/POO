@@ -88,7 +88,9 @@ public class calculate {
 			for(Iterator<Integer> it = index_compare.iterator(); it.hasNext();){
 				int i_compare = it.next();
 				int v_compare = it2.next();
-				if(Data[i][i_compare] == v_compare) equal++;
+				if(Data[i][i_compare] != v_compare){
+					break;
+				}else equal++;
 				
 			}
 			if(index_compare.size()==equal) Nijk++;
@@ -109,12 +111,14 @@ public class calculate {
 			Iterator<Integer> it2 = values_compare.iterator();
 			Iterator<Integer> it = index_compare.iterator();
 			@SuppressWarnings("unused")
-			int tmp = it.next();
+			int tmp = it.next();//passa ele proprio	
 			tmp = it2.next();
-			for(;it.hasNext();){		//passa ele proprio	
+			while(it.hasNext()){		
 				int i_compare = it.next();
 				int v_compare = it2.next();
-				if(Data[i][i_compare] == v_compare) t++;			
+				if(Data[i][i_compare] != v_compare) {
+					break;			
+				}else t++;
 			}
 			if (t==index_compare.size()-1) Nij++;
 		}

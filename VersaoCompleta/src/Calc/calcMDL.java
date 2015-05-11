@@ -32,6 +32,7 @@ public class calcMDL extends calcLL {
 			B = B + (r[n]-1)*(q+1);
 		}
 		
+		//System.out.println("B é: " + B);
 		return Math.abs(B);
 	}
 	
