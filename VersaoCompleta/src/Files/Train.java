@@ -7,9 +7,6 @@ import java.util.Arrays;
 //import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-//import java.util.Map;
-//import java.util.Set;
-
 
 
 public class Train extends NetInfo{
@@ -67,7 +64,6 @@ public class Train extends NetInfo{
 		line = io.readLine(br);
 		
 		this.setParameters(line);
-		//this.createBN(number_lines-1);
 		int n = 0;
 		
 		while ((line = io.readLine(br)) != null){

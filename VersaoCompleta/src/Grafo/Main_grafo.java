@@ -1,63 +1,42 @@
 package Grafo;
 
 import Calc.*;
-import Inference.*;
-
+import Inference.infer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import Calc.calcLL;
-import DFS.REQ;
 import Files.*;
 
 public class Main_grafo {
 
 	public static void main(String[] args) throws IOException {
 
-		long time4 = 0 ;
+
 	    long startTime = System.currentTimeMillis();
 		
 		grafo graph = new grafo();
 		Train teste = new Train();
 		Test file = new Test();
-		teste.readTrain("train-data.csv");	
+		teste.readTrain("train-data.csv");	// adaptar pa receber da UI?
 		file.readTest("test-data.csv");
 		int i,j;
 		int Data[][] = teste.matrix_data;
-		int nr_rdm = 10;
+		int nr_rdm = 100; //parametro a receber
 				
 
 		int[] r = teste.vectorR;
-		REQ req = new REQ ();
-		calcLL scll = new calcLL();
 		calcMDL scmdl = new calcMDL();
 		calcTeta tt = new calcTeta();
 		
 		int [][] mat2= new int[r.length][(r.length)/2];
 		int [][] mat1= new int[r.length][(r.length)/2];
-		int [][] mat_cycle= new int[r.length][(r.length)/2];
-		int [][] mat_maxll= new int[r.length][(r.length)/2];
-		int [][] mat_maxmdl= new int[r.length][(r.length)/2];
-		double score_llmax, score_mdlmax, score_ll, score_mdl;
+		double score_llmax, score_mdlmax;
 		List<double[]> tetas = new ArrayList<double[]>();
-		
-		score_llmax = scmdl.LL(Data, mat_maxll, r);
-		score_mdlmax = scmdl.MDL(Data, mat_maxmdl, r);
 
-	
-		long start1 = System.currentTimeMillis();
 		mat1 = graph.createGrafo(Data, r, 0, nr_rdm);
-		long finish1 = System.currentTimeMillis();
-		long start2 = System.currentTimeMillis();
+
 		mat2=graph.createGrafo(Data, r, 1, nr_rdm);
-		long finish2 = System.currentTimeMillis();
-		long time1 = finish1 - start1;
-		long time2 = finish2 - start2;
-		
-		//System.out.println("Time LL = " + time1 + " ms");
-		//System.out.println("Time MDL = " + time2 + " ms");
+
 		
 		score_llmax = scmdl.LL(Data, mat1, r);
 				
@@ -82,11 +61,9 @@ public class Main_grafo {
 		
 		tetas = tt.tetas(Data, mat1, r);
 		
-		// LE TESTE E CRIA MATRIZ DE INTEIROS COM O MESMO CHAMADA "test"
-		
 		
 		int [] fut_values = new int [file.matrix_test.length];
-		int var_to_guess = 0; // parametro a receber
+		int var_to_guess = 2; // parametro a receber e a verificar se esta correcto
 		
 		infer guess = new infer();
 		

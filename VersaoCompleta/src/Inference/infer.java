@@ -58,19 +58,15 @@ public class infer {
 			for(int k=0; k<r[index_parents.get(0)]; k++){
 				
 				j = composeJ (r,  index_parents,  j_values);
-				
-				
-				teta = tetas.get(son)[(j*r[son])+k]; //meter iterador???
-				
+								
+				teta = tetas.get(son)[(j*r[son])+k]; //meter iterador??? só vai buscar um valor, nao e suposto percorrer			
 				
 				if(teta>pmax){
 					pmax=teta;
 					most_likely = k;
 				}
 			}
-			
-		
-		
+					
 		return most_likely;
 	}
 	

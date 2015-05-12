@@ -101,7 +101,6 @@ public class tabu {
 					if(values[2]!=0){
 						values[2]--;
 						op_list.set(k, values);
-						//System.out.println("(i,j) = "+i+","+j+" ainda com "+values[2] +" tentativas");
 						return true; // nao tenta a operação
 					}else{
 						values[2] = retries_intra;

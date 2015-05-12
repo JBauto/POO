@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-//import DFS.REQ;
-
-
 
 public class calculate {
 
@@ -17,11 +14,9 @@ public class calculate {
 		
 		ind_parents.add(ind_son+n);
 		
-		for(i=mat_adj.length-1;i>-1;i--){ //de notar que mat_adj � semque quadrada logo o lenght � igual ao nr de colunas (e linhas)
-			if (mat_adj[i][ind_son] == 1){
-				
-				ind_parents.add(i); //se o pai for X2 fica com o indice 1, etc
-				
+		for(i=mat_adj.length-1;i>-1;i--){ 
+			if (mat_adj[i][ind_son] == 1){				
+				ind_parents.add(i); //se o pai for X2 fica com o indice 1, etc				
 			}
 			
 		}
@@ -47,15 +42,15 @@ public class calculate {
 		
 		for(it2=it;it2.hasNext();){ //passa o primeiro da lista que � ele proprio, ver apontamentos da professora		
 			int poss_parent = it2.next();
-			ji=(j+1)*(r[poss_parent]-1);//esquisito mas bate certo para os que testei ate agora
+			ji=(j+1)*(r[poss_parent]-1);
 			j=j+ji;
 		}
 		
 		return j;
 	}
 	
-	public List<Integer>  valuesToCompare (int [] r, int ind_son, int j, int k, List<Integer> ind_parents ){ //na minha cabe�a funciona, ta um bocado confuso, por testar!!
-		List<Integer> values = new ArrayList<Integer>();  //ind_son nao parece ser preciso
+	public List<Integer>  valuesToCompare (int [] r, int j, int k, List<Integer> ind_parents ){ 
+		List<Integer> values = new ArrayList<Integer>();  
 		int nr_parents =ind_parents.size() -1;
 		int l = 1;
 		
@@ -74,7 +69,7 @@ public class calculate {
 			j=(j-(j%r[poss_parent]))/(r[poss_parent]);
 		}
 			poss_parent = it2.next();
-			values.add(j%r[poss_parent]); //por testar!!! (mais que um pai)
+			values.add(j%r[poss_parent]);
 		
 		return values;
 	}
@@ -100,33 +95,5 @@ public class calculate {
 		
 		return Nijk;
 	}
-	/*
-	public int countNij (int [][] Data, List<Integer> index_compare, List<Integer> values_compare){ //provavel que esteja mal
-		int Nij=0, i, t;
-		
-		if(index_compare.size()==1)return Data.length;
-		
-		for(i=0; i< Data.length; i++){
-			t=0;
-			Iterator<Integer> it2 = values_compare.iterator();
-			Iterator<Integer> it = index_compare.iterator();
-			@SuppressWarnings("unused")
-			int tmp = it.next();
-			tmp = it2.next();
-			while(it.hasNext()){		//passa ele proprio	
-				int i_compare = it.next();
-				int v_compare = it2.next();
-				if(Data[i][i_compare] != v_compare) {
-					break;			
-				}else t++;			
-			}
-			if (t==index_compare.size()-1) Nij++;
-		}
-		
-		return Nij;
-	}
-	
-*/
-		
 
 }

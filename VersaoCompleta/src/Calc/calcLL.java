@@ -34,12 +34,9 @@ public class calcLL  {
 			time = time + endTime - startTime;
 			startTime2 = System.nanoTime();
 			for(i=0;i<j+1;i++){
-				List<Integer> values_compare =   calc.valuesToCompare ( r, n, i, 0, index_parents ); //no valor de k vai 0, porque ainda nao o sabemos mas ele nao vai ser preciso, melhor solu�ao?
-				//Nij =  calc.countNij (Data, index_parents,  values_compare);
-				//System.out.println("N " + n+ " " +i+ "  :  " + Nij);
 				List <Double> Nijk_val = new ArrayList<Double>();
 				for(k=0;k<r[n];k++){
-					values_compare =   calc.valuesToCompare ( r, n, i, k, index_parents );
+					List<Integer> values_compare =   calc.valuesToCompare ( r, i, k, index_parents );
 					Nijk_val.add(calc.countNijk (Data, index_parents, values_compare));
 				}
 				Nij = 0;
@@ -50,16 +47,13 @@ public class calcLL  {
 					Nijk = it.next();
 					if(Nijk!=0 && Nij!=0){
 						score = score + Nijk*(Math.log10(Nijk/Nij)/Math.log10(2));
-						//System.out.println("Score: " + score);
 					}
 				}
 			}
 			endTime2 = System.nanoTime();
 			count = count + endTime2-startTime2;
 		}
-		
-		//System.out.println(time/1000000);
-		//System.out.println(count/1000000);
+
 		return score;
 	}
 	
