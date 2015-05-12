@@ -1,6 +1,7 @@
 package Calc;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class calcTeta  {
@@ -9,7 +10,7 @@ public class calcTeta  {
 	
 	public List<double[]> tetas(int [][] Data, int [][] mat_adj, int [] r){
 		int i, j, n, k, t, l;
-		double Nij, Nijk, Tijk;
+		double Nij, Nijk;
 		List<double[]> nodes = new ArrayList<double[]>();
 
 		
@@ -28,7 +29,24 @@ public class calcTeta  {
 			double[] tetas = new double[l];
 			t=0;
 			for(i=0;i<j+1;i++){
-				List<Integer> values_compare =  calc.valuesToCompare ( r, n, i, 0, index_parents ); //no valor de k vai 0, porque ainda nao o sabemos mas ele nao vai ser preciso, melhor soluçao?
+				List<Integer> values_compare =   calc.valuesToCompare ( r, n, i, 0, index_parents ); //no valor de k vai 0, porque ainda nao o sabemos mas ele nao vai ser preciso, melhor soluï¿½ao?
+				//Nij =  calc.countNij (Data, index_parents,  values_compare);
+				//System.out.println("N " + n+ " " +i+ "  :  " + Nij);
+				List <Double> Nijk_val = new ArrayList<Double>();
+				for(k=0;k<r[n];k++){
+					values_compare =   calc.valuesToCompare ( r, n, i, k, index_parents );
+					Nijk_val.add(calc.countNijk (Data, index_parents, values_compare));
+				}
+				Nij = 0;
+				for(Iterator<Double> it = Nijk_val.iterator();it.hasNext();){
+					Nij = Nij + it.next();
+				}
+				for(Iterator<Double> it = Nijk_val.iterator(); it.hasNext(); ){
+					Nijk = it.next();
+					tetas[t]=(Nijk+0.5)/(Nij+0.5*r[n]);
+					t++;
+				}
+				/*List<Integer> values_compare =  calc.valuesToCompare ( r, n, i, 0, index_parents ); //no valor de k vai 0, porque ainda nao o sabemos mas ele nao vai ser preciso, melhor soluçao?
 				Nij = calc.countNij (Data, index_parents,  values_compare);
 				for(k=0;k<r[n];k++){
 					values_compare =  calc.valuesToCompare ( r, n, i, k, index_parents );
@@ -39,7 +57,7 @@ public class calcTeta  {
 					//System.out.println("Tijk: " + Tijk);
 					tetas[t]=Tijk;
 					t++;
-				}
+				}*/
 			}
 			nodes.add(tetas);
 		

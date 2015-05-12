@@ -31,7 +31,7 @@ public class Main_grafo {
 
 		int[] r = teste.vectorR;
 		REQ req = new REQ ();
-		calcLL scll = new calcLL();
+		//calcLL scll = new calcLL();
 		calcMDL scmdl = new calcMDL();
 		calcTeta tt = new calcTeta();
 		
@@ -43,7 +43,7 @@ public class Main_grafo {
 		double score_llmax, score_mdlmax, score_ll, score_mdl;
 		List<double[]> tetas = new ArrayList<double[]>();
 		
-		score_llmax = scll.LL(Data, mat_maxll, r);
+		score_llmax = scmdl.LL(Data, mat_maxll, r);
 		score_mdlmax = scmdl.MDL(Data, mat_maxmdl, r);
 
 	
@@ -59,7 +59,7 @@ public class Main_grafo {
 		//System.out.println("Time LL = " + time1 + " ms");
 		//System.out.println("Time MDL = " + time2 + " ms");
 		
-		score_llmax = scll.LL(Data, mat1, r);
+		score_llmax = scmdl.LL(Data, mat1, r);
 				
 		score_mdlmax = scmdl.MDL(Data, mat2, r);
 				
@@ -80,16 +80,18 @@ public class Main_grafo {
 			System.out.println();
 		}
 		
-		/*tetas = tt.tetas(Data, mat_maxll, r);
+		tetas = tt.tetas(Data, mat_maxll, r);
 		
 		// LE TESTE E CRIA MATRIZ DE INTEIROS COM O MESMO CHAMADA "test"
-		int [] fut_values = new int [Data.length];
+		
+		
+		int [] fut_values = new int [test.length];
 		int var_to_guess = 0; // parametro a receber
 		
 		infer guess = new infer();
 		
 		for(i=0; i< Data.length; i++){
-			fut_values[i]= guess.inf (Data, mat_maxll, r , var_to_guess + r.length/2, tetas, i);
+			fut_values[i]= guess.inf (test, mat_maxll, r , var_to_guess + r.length/2, tetas, i);
 			
 		}
 		
@@ -98,7 +100,7 @@ public class Main_grafo {
 			System.out.print(fut_values[i] + " ");
 			
 		}
-		System.out.println();*/
+		System.out.println();
 		
 		long stopTime = System.currentTimeMillis();
 	    long elapsedTime = stopTime - startTime;

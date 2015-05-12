@@ -32,7 +32,7 @@ public class grafo {
 		long scoretime = 0;
 		long addtime = 0;
 		int best_i = -1, best_j = -1;
-		
+		calcMDL scmdl = new calcMDL();
 		
 		while(true){
 			
@@ -70,14 +70,13 @@ public class grafo {
 		if(type_score==0){
 			
 			mat_rdm=0;
-			calcLL scll = new calcLL();
 			
-			score_MAX=score_max=scll.LL(Data, mat_adj_max, r);
+			score_MAX=score_max=scmdl.LL(Data, mat_adj_max, r);
 			
 			while(true){ // enquanto existir um vizinho com score mais alto que mat_adj_max ou outro criterio de paragem
 						 // pode ser melhor um do while por causa do 1º caso
 				
-				double score_viz_max=scll.LL(Data, mat_adj_vizm, r);
+				double score_viz_max=scmdl.LL(Data, mat_adj_vizm, r);
 			
 				long startTime = System.nanoTime();
 				long scoreTime = 0;
@@ -96,7 +95,7 @@ public class grafo {
 						//System.out.println("Tentei adicionar "+i+","+j);
 						addTime2 = System.nanoTime();
 						scoreTime = System.nanoTime();
-						score_test = scll.LL(Data, mat_adj_test, r);
+						score_test = scmdl.LL(Data, mat_adj_test, r);
 						scoreTime2 = System.nanoTime();
 						//System.out.println((i+1) + " is now a parent of " + (j+1) + " SCORE: " +score_test + " SCORE VIZ MAX "+ score_viz_max);
 						if (score_test>score_viz_max) {
@@ -128,7 +127,7 @@ public class grafo {
 						else
 							continue;
 						//System.out.println("Tentei remover "+i+","+j);
-						score_test = scll.LL(Data, mat_adj_test, r);
+						score_test = scmdl.LL(Data, mat_adj_test, r);
 						if (score_test>score_viz_max) {
 							//System.out.println("Melhor remove "+i+","+j);
 							score_op = 1;
@@ -162,7 +161,7 @@ public class grafo {
 						else
 							continue;
 						//System.out.println("Tentei flip "+i+","+j);
-						score_test = scll.LL(Data, mat_adj_test, r);
+						score_test = scmdl.LL(Data, mat_adj_test, r);
 						if (score_test>score_viz_max) {
 							//System.out.println("Melhor flip "+i+","+j);
 							score_op = 1;
@@ -231,7 +230,7 @@ public class grafo {
 							
 						}
 						mat_adj_vizm = new int[r.length][(r.length)/2];
-						score_max=scll.LL(Data, mat_adj_vizm, r);
+						score_max=scmdl.LL(Data, mat_adj_vizm, r);
 						mat_rdm++;
 					}else{
 						return mat_MAX;
@@ -246,7 +245,7 @@ public class grafo {
 			//copiado de cima
 
 			mat_rdm=0;
-			calcMDL scmdl = new calcMDL();
+			//calcMDL scmdl = new calcMDL();
 			
 			score_MAX=score_max=scmdl.MDL(Data, mat_adj_max, r);
 			
