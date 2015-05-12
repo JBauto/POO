@@ -21,12 +21,12 @@ public class Main_grafo {
 		
 		grafo graph = new grafo();
 		Train teste = new Train();
-		Test file = new Test();
+		//Test file = new Test();
 		teste.readTrain("train-data.csv");	
-		file.readTest("test-data.csv");
+		//file.readTest("test-data.csv");
 		int i,j;
 		int Data[][] = teste.matrix_data;
-		int nr_rdm = 10;
+		int nr_rdm = 100;
 				
 
 		int[] r = teste.vectorR;
@@ -51,7 +51,7 @@ public class Main_grafo {
 		mat1 = graph.createGrafo(Data, r, 0, nr_rdm);
 		long finish1 = System.currentTimeMillis();
 		long start2 = System.currentTimeMillis();
-		//mat2=graph.createGrafo(Data, r, 1, nr_rdm);
+		mat2=graph.createGrafo(Data, r, 1, nr_rdm);
 		long finish2 = System.currentTimeMillis();
 		long time1 = finish1 - start1;
 		long time2 = finish2 - start2;
@@ -61,7 +61,7 @@ public class Main_grafo {
 		
 		score_llmax = scll.LL(Data, mat1, r);
 				
-		//score_mdlmax = scmdl.MDL(Data, mat2, r);
+		score_mdlmax = scmdl.MDL(Data, mat2, r);
 				
 		System.out.println("Mat LL com score:" + score_llmax);
 		
@@ -71,7 +71,7 @@ public class Main_grafo {
 			}
 			System.out.println();
 		}
-		/*
+		
 		System.out.println("Mat MDL com score:" + score_mdlmax);
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
@@ -79,7 +79,7 @@ public class Main_grafo {
 			}
 			System.out.println();
 		}
-		*/
+		
 		/*tetas = tt.tetas(Data, mat_maxll, r);
 		
 		// LE TESTE E CRIA MATRIZ DE INTEIROS COM O MESMO CHAMADA "test"

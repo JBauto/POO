@@ -56,9 +56,9 @@ public class operations {
 	
 	public int [][] remove(int [][] mat_adj, int parent, int son){
 		
-		int [][] mat_adj_ini = new int [mat_adj.length][mat_adj[0].length];
-		
-		if (mat_adj[parent][son]==1) {
+
+		if (mat_adj[parent][son]==1){
+			int [][] mat_adj_ini = new int [mat_adj.length][mat_adj[0].length];
 			for(int i =0; i<mat_adj.length;i++){
 				int[] aMatrix = mat_adj[i];
 				System.arraycopy(aMatrix, 0, mat_adj_ini[i], 0, mat_adj[0].length);
@@ -82,12 +82,6 @@ public class operations {
 	
 	public int [][] flip(int [][] mat_adj, int parent, int son){
 		int n = (mat_adj.length)/2;
-		
-		
-		if (parent-n<0)return mat_adj;
-		
-		if (mat_adj[parent][son]==0) return mat_adj;
-	
 		
 		
 		if(req.GetParents(mat_adj, parent-n)) return mat_adj;//ve se o pai ja tem 3 pais

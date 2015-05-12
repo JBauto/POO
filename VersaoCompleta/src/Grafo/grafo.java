@@ -156,7 +156,8 @@ public class grafo {
 				*/
 				for(i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){ // todos os flips possiveis, para o exemplo ele nunca vai fazer
-						if(!tabu_list_LL.checkTabu(1, i, j))							   // podia so fazer para os que tem filhos
+						int n = (mat_adj_max.length)/2;
+						if(!tabu_list_LL.checkTabu(1, i, j) && mat_adj_max[i][j] == 0 && (i-n)>0)							   // podia so fazer para os que tem filhos
 							mat_adj_test = operator.flip(mat_adj_max, i, j);
 						else
 							continue;
@@ -302,7 +303,8 @@ public class grafo {
 				
 				for(i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){ // todos os flips possiveis, para o exemplo ele nunca vai fazer
-						if(!tabu_list_MDL.checkTabu(1, i, j))
+						int n = (mat_adj_max.length)/2;
+						if(!tabu_list_MDL.checkTabu(1, i, j) && mat_adj_max[i][j] == 0 && (i-n)>0)
 							mat_adj_test = operator.flip(mat_adj_max, i, j);
 						else
 							continue;
