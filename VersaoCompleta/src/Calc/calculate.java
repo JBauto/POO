@@ -100,7 +100,7 @@ public class calculate {
 		
 		return Nijk;
 	}
-	
+	/*
 	public int countNij (int [][] Data, List<Integer> index_compare, List<Integer> values_compare){ //provavel que esteja mal
 		int Nij=0, i, t;
 		
@@ -126,7 +126,7 @@ public class calculate {
 		return Nij;
 	}
 	
-
+*/
 		
 
 }

@@ -80,7 +80,7 @@ public class Main_grafo {
 			System.out.println();
 		}
 		
-		tetas = tt.tetas(Data, mat_maxll, r);
+		tetas = tt.tetas(Data, mat1, r);
 		
 		// LE TESTE E CRIA MATRIZ DE INTEIROS COM O MESMO CHAMADA "test"
 		
@@ -90,11 +90,11 @@ public class Main_grafo {
 		
 		infer guess = new infer();
 		
-		for(i=0; i< Data.length; i++){
-			fut_values[i]= guess.inf (file.matrix_test, mat_maxll, r , var_to_guess + r.length/2, tetas, i);
+		for(i=0; i< file.matrix_test.length; i++){
+			fut_values[i]= guess.inf (file.matrix_test, mat1, r , var_to_guess + r.length/2, tetas, i);
 			
 		}
-		for (i=0;i<Data.length;i++){
+		for (i=0;i<file.matrix_test.length;i++){
 			
 			System.out.print(fut_values[i] + " ");
 			
