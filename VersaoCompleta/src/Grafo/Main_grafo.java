@@ -20,10 +20,8 @@ public class Main_grafo {
 	    long startTime = System.currentTimeMillis();
 		
 		grafo graph = new grafo();
-		Train teste = new Train();
-		Test file = new Test();
+		Train teste = new Train();		
 		teste.readTrain("train-data.csv");	
-		file.readTest("test-data.csv");
 		int i,j;
 		int Data[][] = teste.matrix_data;
 		int nr_rdm = 10;
@@ -58,24 +56,31 @@ public class Main_grafo {
 		int [][] mat_maxmdl= new int[r.length][(r.length)/2];
 		double score_llmax, score_mdlmax, score_ll, score_mdl;
 		List<double[]> tetas = new ArrayList<double[]>();
-		
+		int [][] mat1= new int[r.length][(r.length)/2];
 		score_llmax = scll.LL(Data, mat_maxll, r);
 		score_mdlmax = scmdl.MDL(Data, mat_maxmdl, r);
+		
 		//mat3[0][0] = mat3[0][1] = mat3[0][2] = mat3[1][0] = mat3[2][1]= mat3[2][2] = mat3[3][1]= mat3[3][2] =1;
 		//System.out.println("Mat3 LL com score:" + scll.LL(Data, mat3, r));
 	
-		
+		/*
 		Random rand = new Random();
+		int rdm, sum_rdm;
 		
 		for(int rd =0; rd< nr_rdm; rd++){
 				int [][] mat1= new int[r.length][(r.length)/2];
+				
 			while(true){
 				
 				int k=0;
 				
-				for (i=0;i < mat1.length;i++){
-					for(j=0;j<mat1[0].length ;j++){
-						mat1[i][j]= rand.nextInt(2);
+				for (j=0;j<mat1[0].length ;j++){
+					sum_rdm=0;
+					for(i=0;i<mat1.length ;i++){
+						rdm = rand.nextInt(2);
+						mat1[i][j]= rdm;
+						sum_rdm = sum_rdm + rdm;
+						if(sum_rdm==3)break;
 					}
 				}
 			
@@ -93,30 +98,40 @@ public class Main_grafo {
 				}
 				
 				if (k==0) 	break;
-	
+				
 			}
-	
+		
 			//System.out.println(Arrays.deepToString(Data));
 			for (i=0;i < mat1.length;i++){
 						for(j=0;j<mat1[0].length;j++){
 							mat2[i][j]= mat1[i][j];
 						}
 					}
+			*/
 			long start1 = System.currentTimeMillis();
-			mat1=graph.createGrafo(Data, r, 0, mat1);
+			mat1=graph.createGrafo(Data, r, 0, nr_rdm);
 			long finish1 = System.currentTimeMillis();
 			long start2 = System.currentTimeMillis();
-			mat2=graph.createGrafo(Data, r, 1, mat2);
+			mat2=graph.createGrafo(Data, r, 1, nr_rdm);
 			long finish2 = System.currentTimeMillis();
 			
 			long time1 = finish1 - start1;
 			long time2 = finish2 - start2;
 			
+/*
+			for (i=0;i<r.length;i++){
+				for (j=0;j<(r.length)/2;j++){
+				System.out.print(mat1[i][j] + " ");
+				}
+				System.out.println();
+			}
+			*/
+			
 			System.out.println("Time LL = " + time1 + " ms");
 			System.out.println("Time MDL = " + time2 + " ms");
 			
-			score_ll = scll.LL(Data, mat1, r);
-			
+			score_llmax = scll.LL(Data, mat1, r);
+			/*
 			if(score_ll > score_llmax){
 				score_llmax=score_ll;
 				for( i =0; i<mat1.length;i++){
@@ -124,7 +139,7 @@ public class Main_grafo {
 						mat_maxll[i][j] = mat1[i][j];
 					}
 				}
-			}
+			}*/
 	/*
 			System.out.println("Mat1 LL com score:" + scll.LL(Data, mat1, r));
 			
@@ -136,8 +151,8 @@ public class Main_grafo {
 			}
 	*/		
 			
-			score_mdl = scmdl.MDL(Data, mat2, r);
-			
+			score_mdlmax = scmdl.MDL(Data, mat2, r);
+			/*
 			if(score_mdl > score_mdlmax){
 				score_mdlmax=score_mdl;
 				for( i =0; i<mat2.length;i++){
@@ -146,6 +161,8 @@ public class Main_grafo {
 					}
 				}
 			}
+			
+			*/
 			/*
 			System.out.println("Mat2 MDL com score:" + scmdl.MDL(Data, mat2, r));
 			for (i=0;i<r.length;i++){
@@ -155,29 +172,29 @@ public class Main_grafo {
 				System.out.println();
 			}
 			
-			*/
+			
 		
-		}
+		}*/
 		
 		
 		System.out.println("Mat LL com score:" + score_llmax);
-		
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
-			System.out.print(mat_maxll[i][j] + " ");
+			System.out.print(mat1[i][j] + " ");
 			}
 			System.out.println();
 		}
+	
 		
 		System.out.println("Mat MDL com score:" + score_mdlmax);
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
-			System.out.print(mat_maxmdl[i][j] + " ");
+			System.out.print(mat2[i][j] + " ");
 			}
 			System.out.println();
 		}
 		
-		tetas = tt.tetas(Data, mat_maxll, r);
+		tetas = tt.tetas(Data, mat1, r);
 		
 		// LE TESTE E CRIA MATRIZ DE INTEIROS COM O MESMO CHAMADA "test"
 		int [] fut_values = new int [Data.length];
@@ -186,7 +203,7 @@ public class Main_grafo {
 		infer guess = new infer();
 		
 		for(i=0; i< Data.length; i++){
-			fut_values[i]= guess.inf (Data, mat_maxll, r , var_to_guess + r.length/2, tetas, i);
+			fut_values[i]= guess.inf (Data, mat1, r , var_to_guess + r.length/2, tetas, i);
 			
 		}
 		
