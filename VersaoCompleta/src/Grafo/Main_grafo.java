@@ -35,12 +35,12 @@ public class Main_grafo {
 
 		mat1 = graph.createGrafo(Data, r, 0, nr_rdm);
 
-		//mat2=graph.createGrafo(Data, r, 1, nr_rdm);
+		mat2=graph.createGrafo(Data, r, 1, nr_rdm);
 
 		
 		score_llmax = scmdl.LL(Data, mat1, r);
 				
-		//score_mdlmax = scmdl.MDL(Data, mat2, r);
+		score_mdlmax = scmdl.MDL(Data, mat2, r);
 				
 		System.out.println("Mat LL com score:" + score_llmax);
 		
@@ -50,7 +50,7 @@ public class Main_grafo {
 			}
 			System.out.println();
 		}
-		/*
+		
 		System.out.println("Mat MDL com score:" + score_mdlmax);
 		for (i=0;i<r.length;i++){
 			for (j=0;j<(r.length)/2;j++){
@@ -76,7 +76,7 @@ public class Main_grafo {
 			System.out.print(fut_values[i] + " ");
 			
 		}
-		*/
+		
 		System.out.println();
 		
 		long stopTime = System.currentTimeMillis();
