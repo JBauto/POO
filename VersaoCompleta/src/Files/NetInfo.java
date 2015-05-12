@@ -9,11 +9,12 @@ public class NetInfo {
 	protected HashMap<Integer,List<Integer>> file_data;
 	protected List<List<Integer>> paired_data;
 	public int[][] matrix_data;
+	public int[][] matrix_test;
 	public int[] vectorR;
-	
+		
 	protected int graph_size;
 	protected FileIO io;
-    int number_var;
+    protected int number_var;
 	
 	protected NetInfo(){
 		file_data = new HashMap<Integer,List<Integer>>(); //nome-tempo-valor
@@ -31,6 +32,10 @@ public class NetInfo {
 		
 	public void createMatrix(int lines, int col){
 		matrix_data = new int [lines][col];
+	}
+	
+	public void createTest(int lines,int col){
+		matrix_test = new int[lines][col];
 	}
 	
 	public void createRvector(Integer x){

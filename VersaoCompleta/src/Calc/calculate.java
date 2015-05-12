@@ -111,14 +111,14 @@ public class calculate {
 			Iterator<Integer> it2 = values_compare.iterator();
 			Iterator<Integer> it = index_compare.iterator();
 			@SuppressWarnings("unused")
-			int tmp = it.next();//passa ele proprio	
+			int tmp = it.next();
 			tmp = it2.next();
-			while(it.hasNext()){		
+			while(it.hasNext()){		//passa ele proprio	
 				int i_compare = it.next();
 				int v_compare = it2.next();
 				if(Data[i][i_compare] != v_compare) {
 					break;			
-				}else t++;
+				}else t++;			
 			}
 			if (t==index_compare.size()-1) Nij++;
 		}
