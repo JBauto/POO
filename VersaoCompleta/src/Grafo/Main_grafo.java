@@ -21,17 +21,17 @@ public class Main_grafo {
 		
 		grafo graph = new grafo();
 		Train teste = new Train();
-		//Test file = new Test();
+		Test file = new Test();
 		teste.readTrain("train-data.csv");	
-		//file.readTest("test-data.csv");
+		file.readTest("test-data.csv");
 		int i,j;
 		int Data[][] = teste.matrix_data;
-		int nr_rdm = 100;
+		int nr_rdm = 10;
 				
 
 		int[] r = teste.vectorR;
 		REQ req = new REQ ();
-		//calcLL scll = new calcLL();
+		calcLL scll = new calcLL();
 		calcMDL scmdl = new calcMDL();
 		calcTeta tt = new calcTeta();
 		
@@ -85,16 +85,15 @@ public class Main_grafo {
 		// LE TESTE E CRIA MATRIZ DE INTEIROS COM O MESMO CHAMADA "test"
 		
 		
-		int [] fut_values = new int [test.length];
+		int [] fut_values = new int [file.matrix_test.length];
 		int var_to_guess = 0; // parametro a receber
 		
 		infer guess = new infer();
 		
 		for(i=0; i< Data.length; i++){
-			fut_values[i]= guess.inf (test, mat_maxll, r , var_to_guess + r.length/2, tetas, i);
+			fut_values[i]= guess.inf (file.matrix_test, mat_maxll, r , var_to_guess + r.length/2, tetas, i);
 			
 		}
-		
 		for (i=0;i<Data.length;i++){
 			
 			System.out.print(fut_values[i] + " ");

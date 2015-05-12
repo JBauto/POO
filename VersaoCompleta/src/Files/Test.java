@@ -27,6 +27,6 @@ public class Test extends NetInfo {
 				matrix_test[i][j] = Integer.parseInt(var[j]);
 			}
 			i++;
-		}		
+		}
 	}
 }
