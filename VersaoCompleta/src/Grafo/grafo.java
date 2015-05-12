@@ -25,9 +25,6 @@ public class grafo {
 		int [][] mat_cycle = new int[r.length][(r.length)/2];
 		REQ req = new REQ ();
 		Random rand = new Random();
-		long time = 0;
-		long scoretime = 0;
-		long addtime = 0;
 		int best_i = -1, best_j = -1;
 		calcMDL scmdl = new calcMDL();
 		
@@ -48,9 +45,8 @@ public class grafo {
 			}
 		
 			for( i =0; i<mat_adj_max.length;i++){
-				for( j=0; j<mat_adj_max[0].length;j++){
-					mat_cycle[i][j] = mat_adj_max[i][j];
-				}
+				int[] aMatrix = mat_adj_max[i];
+				System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);		
 			}
 			for( i =0; i<mat_adj_max.length;i++){
 				 for (j=0; j<mat_adj_max[0].length;j++){
@@ -74,25 +70,17 @@ public class grafo {
 				
 				double score_viz_max=scmdl.LL(Data, mat_adj_vizm, r);
 			
-				long startTime = System.nanoTime();
-				long scoreTime = 0;
 				@SuppressWarnings("unused")
 				int score_op = 0;
-				long scoreTime2 = 0;
-				long addTime = 0;
-				long addTime2 = 0;
+
 				for(i=0;i<r.length;i++){
 					
 					for (j=0;j<(r.length)/2;j++){ // todas as adiçoes possiveis
-						addTime = System.nanoTime();
 						if(!tabu_list_LL.checkTabu(1, i, j) && mat_adj_max[i][j] == 0)
 							mat_adj_test = operator.add(mat_adj_max, i, j);
 						else
 							continue;
-						addTime2 = System.nanoTime();
-						scoreTime = System.nanoTime();
 						score_test = scmdl.LL(Data, mat_adj_test, r);
-						scoreTime2 = System.nanoTime();
 						if (score_test>score_viz_max) {
 							score_op = 1;
 							best_i = i;
@@ -107,10 +95,6 @@ public class grafo {
 							
 					}
 				}
-				long endTime = System.nanoTime();
-				time = time + (endTime-startTime);
-				scoretime = scoretime + (scoreTime2-scoreTime);
-				addtime = addtime + (addTime2 - addTime);
 				
 				for(i=0;i<r.length;i++){
 					for (j=0;j<(r.length)/2;j++){ // todas as subtracçoes possiveis 
@@ -188,9 +172,8 @@ public class grafo {
 							}
 						
 							for( i =0; i<mat_adj_max.length;i++){
-								for( j=0; j<mat_adj_max[0].length;j++){
-									mat_cycle[i][j] = mat_adj_max[i][j];
-								}
+								int[] aMatrix = mat_adj_max[i];
+								System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);
 							}
 							for( i =0; i<mat_adj_max.length;i++){
 								 for (j=0; j<mat_adj_max[0].length;j++){
@@ -316,9 +299,8 @@ public class grafo {
 							}
 						
 							for( i =0; i<mat_adj_max.length;i++){
-								for( j=0; j<mat_adj_max[0].length;j++){
-									mat_cycle[i][j] = mat_adj_max[i][j];
-								}
+								int[] aMatrix = mat_adj_max[i];
+								System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);
 							}
 							for( i =0; i<mat_adj_max.length;i++){
 								 for (j=0; j<mat_adj_max[0].length;j++){
