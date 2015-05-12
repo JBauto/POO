@@ -11,7 +11,7 @@ public class calcMDL extends calcLL {
 		
 		int B = calculateB(mat_adj, r);
 		
-		score = LL(Data , mat_adj, r) - 0.5 * Math.log10(r.length) * B;
+		score = LL(Data , mat_adj, r) - 0.5 * (Math.log10(r.length)/Math.log10(2)) * B;
 		
 		return score;
 	}

@@ -33,7 +33,7 @@ public class calcLL  {
 					Nijk =  calc.countNijk (Data, index_parents, values_compare);
 					//System.out.println("N " + n+ " " +i+ " " +k+ "  :  " + Nijk);
 					if(Nijk!=0 && Nij!=0){
-						score = score + Nijk*(Math.log10(Nijk/Nij));
+						score = score + Nijk*(Math.log10(Nijk/Nij)/Math.log10(2));
 						//System.out.println("Score: " + score);
 					}
 				}
