@@ -11,6 +11,7 @@ public class NetInfo {
 	public int[][] matrix_data;
 	public int[][] matrix_test;
 	public int[] vectorR;
+	public String[] VariableNames;
 		
 	protected int graph_size;
 	protected FileIO io;
@@ -49,6 +50,15 @@ public class NetInfo {
 		if(vectorR[index] < x){
 			vectorR[index] = x + 1;
 			vectorR[number_var+index] = x + 1;
+		}
+	}
+	
+	public void nodeNames(String line){
+		String[] tmp = line.split(",");
+		VariableNames = new String[tmp.length*2];
+		for(int i = 0; i<tmp.length;i++){
+			VariableNames[i] = tmp[i] + "_t";
+			VariableNames[i+tmp.length] = tmp[i] + "_t+1";
 		}
 	}
 	

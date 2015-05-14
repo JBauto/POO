@@ -15,9 +15,9 @@ public class FileIO {
 		return lines;
 	}
 	public BufferedReader openFile(String file) throws IOException{
-		File dir = new File(".");
-		File fin = new File(dir.getCanonicalPath() + File.separator + file);
-		BufferedReader br = new BufferedReader(new FileReader(fin));
+//		File dir = new File(".");
+//		File fin = new File(dir.getCanonicalPath() + File.separator + file);
+		BufferedReader br = new BufferedReader(new FileReader(file));
 		return br;
 	}
 	

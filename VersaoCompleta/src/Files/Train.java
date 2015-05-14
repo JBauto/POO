@@ -36,8 +36,8 @@ public class Train extends NetInfo{
 			}
 		}
 		time_samples = time_samples / number_var;
-		System.out.println("Numero de variaveis = "+ number_var);
-		System.out.println("Numero de amostras temporais = "+ time_samples);
+//		System.out.println("Numero de variaveis = "+ number_var);
+//		System.out.println("Numero de amostras temporais = "+ time_samples);
 		
 	}
 	
@@ -67,16 +67,18 @@ public class Train extends NetInfo{
 		int n = 0;
 		
 		while ((line = io.readLine(br)) != null){
-			String[] parts = line.split(",");
+			String[] parts = line.trim().split(",");
+			//System.out.println(Arrays.toString(parts));
 			ArrayList<Integer> lista = new ArrayList<Integer>();
 			file_data.put(n,lista);
 			for(int i = 0;i<parts.length;i++){
 				lista.add(Integer.parseInt(parts[i]));
+				//System.out.println(i);
 			}
 			file_data.put(n, lista);
 			n++;
 		}
-		System.out.println("Numero de linhas = " + number_lines);
+		//System.out.println("Numero de linhas = " + number_lines);
 		br.close();
 		
 		List<Integer> v = new ArrayList<Integer>();
