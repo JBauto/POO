@@ -14,14 +14,17 @@ public class Test extends NetInfo {
 		br = io.openFile(s);
 		line = io.readLine(br);
 		int number_lines = io.numberLine(s);
-		vars = line.trim().split(","); 
+		
+		line = line.replaceAll("\\s+","");
+		vars = line.split(","); 
 		
 		this.nodeNames(line);
 
-		this.createTest(number_lines, vars.length);
+		this.createTest(number_lines-1, vars.length);
 		int i = 0;
 		while ((line = io.readLine(br)) != null){
-			String[] var = line.trim().split(",");
+			line = line.replaceAll("\\s+","");
+			String[] var = line.split(",");
 			for(int j = 0; j<var.length;j++){
 				matrix_test[i][j] = Integer.parseInt(var[j]);
 			}

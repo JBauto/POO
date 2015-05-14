@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -243,6 +244,7 @@ public class mainpanel extends JFrame {
 		((Test) file).readTest(test);
 		int i;
 		int Data[][] = teste.matrix_data;
+
 		int nr_rdm = restarts; 
 		String [] names = file.VariableNames;
 		
@@ -279,8 +281,7 @@ public class mainpanel extends JFrame {
 		infer guess = new infer();
 		
 		for(i=0; i< file.matrix_test.length; i++){
-			fut_values[i]= guess.inf (file.matrix_test, mat1, r , var_to_guess + r.length/2, tetas, i);
-			
+			fut_values[i]= guess.inf (file.matrix_test, mat1, r , var_to_guess + r.length/2, tetas, i);			
 		}
 		for (i=0;i<file.matrix_test.length;i++){
 			

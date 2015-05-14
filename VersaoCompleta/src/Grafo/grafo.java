@@ -42,26 +42,21 @@ public class grafo {
 				sum_rdm=0;
 				for(i=0;i<mat_adj_max.length ;i++){
 					rdm = rand.nextInt(2);
-					if(test_equals) mat_equals[i][j]= mat_adj_max[i][j];
 					mat_adj_max[i][j]= rdm;
 					sum_rdm = sum_rdm + rdm;
 					if(sum_rdm==3)break;
 				}
 			}
 			
-			if(mat_equals.equals(mat_adj_max))
-				continue;
-			test_equals = true;
-			
 			for( i =0; i<mat_adj_max.length;i++){
 				int[] aMatrix = mat_adj_max[i];
 				System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);		
 			}
-			 if ( req.GetParents(mat_cycle, 0) ) k++;
+			 if ( req.GetParents(mat_cycle, 0) ) k=0;
 
-			 for( i =0; i<mat_adj_max.length;i++){
+			 for( i = 0; i<mat_adj_max.length;i++){
 
-				 if (  req.FindCycle(mat_cycle,i)) k++;
+				 if (req.FindCycle(mat_cycle,i)) k++;
 
 			}
 			if (k==0) 	break;
@@ -73,11 +68,16 @@ public class grafo {
 
 			score_MAX=score_max=scmdl.LL(Data, mat_adj_max, r);
 			
+			for( i =0; i<mat_adj_max.length;i++){
+				int[] aMatrix = mat_adj_max[i];
+				System.arraycopy(aMatrix, 0, mat_MAX[i], 0, mat_adj_max[0].length);		
+			}
+			
 			while(true){ // enquanto existir um vizinho com score mais alto que mat_adj_max ou outro criterio de paragem
 						 // pode ser melhor um do while por causa do 1� caso
 				
 				double score_viz_max=scmdl.LL(Data, mat_adj_vizm, r);
-				System.out.println(score_max);
+				//System.out.println(score_max);
 
 				@SuppressWarnings("unused")
 				int score_op = 0;
@@ -191,9 +191,7 @@ public class grafo {
 							if ( req.GetParents(mat_cycle, 0) ) k=0;
 							
 							for( i =0; i<mat_adj_max.length;i++){
-								 
-								 if (  req.FindCycle(mat_cycle,i)) k++;
-
+								 if(req.FindCycle(mat_cycle,i)) k++;
 							}
 							
 							if (k==0) 	break;
