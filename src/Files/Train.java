@@ -20,6 +20,7 @@ public class Train extends NetInfo{
 		String[] var_name;
 		String tmp = null;
 		
+		line = line.replaceAll("\\s+","");
 		parts = line.split(",");
 		time_samples = parts.length;
 		for(i=0;i<parts.length;i++){
@@ -67,11 +68,14 @@ public class Train extends NetInfo{
 		int n = 0;
 		
 		while ((line = io.readLine(br)) != null){
+			line = line.replaceAll("\\s+","");
 			String[] parts = line.split(",");
+			//System.out.println(Arrays.toString(parts));
 			ArrayList<Integer> lista = new ArrayList<Integer>();
 			file_data.put(n,lista);
 			for(int i = 0;i<parts.length;i++){
 				lista.add(Integer.parseInt(parts[i]));
+				//System.out.println(i);
 			}
 			file_data.put(n, lista);
 			n++;

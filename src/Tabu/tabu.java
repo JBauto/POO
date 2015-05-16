@@ -65,7 +65,7 @@ public class tabu {
 
 
 		if(op_list == null)
-			return false; // pode tentar a operação
+			return false; // pode tentar a operaï¿½ï¿½o
 		
 		for(Iterator<int[]>it = op_list.iterator(); it.hasNext();){
 			int[] values = it.next();
@@ -76,18 +76,18 @@ public class tabu {
 					values[2]--;
 					op_list.set(k, values);
 					//System.out.println("(i,j) = "+i+","+j+" ainda com "+values[2] +" tentativas");
-					return true; // nao tenta a operação
+					return true; // nao tenta a operaï¿½ï¿½o
 				}else{
 					values[2] = retries_intra;
 					op_list.set(k,values);
-					return false; // pode tentar a operação
+					return false; // pode tentar a operaï¿½ï¿½o
 				}
 			}else{
 				continue;
 			}			
 		}
 		
-		return false; // pode tentar a operação
+		return false; // pode tentar a operaï¿½ï¿½o
 	}
 	
 	

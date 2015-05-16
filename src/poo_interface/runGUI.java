@@ -1,10 +1,7 @@
 package poo_interface;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
@@ -18,26 +15,26 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
-import Calc.calcLL;
 import Calc.calcMDL;
 import Calc.calcTeta;
-import DFS.REQ;
 import Files.NetInfo;
 import Files.Test;
 import Files.Train;
 import Grafo.grafo;
 import Inference.infer;
 
-public class mainpanel extends JFrame {
+public class runGUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String b1, b2;
 	private boolean n1, n2 = false;
@@ -46,39 +43,19 @@ public class mainpanel extends JFrame {
 	private JTextField textField;
 	private JTextField textField_2;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager
-							.getSystemLookAndFeelClassName());
-					mainpanel frame = new mainpanel();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public mainpanel() {
+	
+	public runGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel label = new JLabel("Path Unknown");
+		final JLabel label = new JLabel("Path Unknown");
 		label.setBounds(20, 200, 384, 23);
 		contentPane.add(label);
 
-		JLabel label_1 = new JLabel("Path Unknown");
+		final JLabel label_1 = new JLabel("Path Unknown");
 		label_1.setBounds(20, 77, 384, 23);
 		contentPane.add(label_1);
 
@@ -131,22 +108,22 @@ public class mainpanel extends JFrame {
 
 		JLabel lblNumberOfRandoms = new JLabel("Number of randoms restarts:");
 		lblNumberOfRandoms.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNumberOfRandoms.setBounds(164, 100, 173, 19);
+		lblNumberOfRandoms.setBounds(170, 95, 173, 19);
 		contentPane.add(lblNumberOfRandoms);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(340, 100, 41, 20);
+		textField_1.setBounds(350, 95, 41, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblVariableToIfer = new JLabel("Variable to Inferred:");
 		lblVariableToIfer.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblVariableToIfer.setBounds(212, 150, 114, 19);
+		lblVariableToIfer.setBounds(218, 145, 114, 19);
 		contentPane.add(lblVariableToIfer);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(340, 150, 41, 20);
+		textField_2.setBounds(350, 145, 41, 20);
 		contentPane.add(textField_2);
 
 		// buttons
@@ -156,7 +133,7 @@ public class mainpanel extends JFrame {
 		rdbtnMdl.setBounds(20, 121, 109, 23);
 		contentPane.add(rdbtnMdl);
 
-		JRadioButton rdbtnLl = new JRadioButton("LL");
+		final JRadioButton rdbtnLl = new JRadioButton("LL");
 		rdbtnLl.setToolTipText("Log-Likelihood");
 		rdbtnLl.setBounds(20, 144, 109, 23);
 		contentPane.add(rdbtnLl);
@@ -166,12 +143,12 @@ public class mainpanel extends JFrame {
 
 		JLabel lblNumberOfTries = new JLabel("Number of tries Tabu:");
 		lblNumberOfTries.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNumberOfTries.setBounds(205, 125, 125, 19);
+		lblNumberOfTries.setBounds(211, 120, 125, 19);
 		contentPane.add(lblNumberOfTries);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(340, 125, 41, 20);
+		textField.setBounds(350, 120, 41, 20);
 		contentPane.add(textField);
 
 		JButton btnLaunch = new JButton("LAUNCH!!!");
@@ -193,21 +170,23 @@ public class mainpanel extends JFrame {
 						return;
 					}
 					try{
-						nvar=Integer.parseInt(textField_2.getText());
+						if (textField_2.getText().length()!=0){
+							nvar=Integer.parseInt(textField_2.getText());
+						}else{
+							nvar=-1;
+						}
 					}catch (NumberFormatException NotANumber){
 						JOptionPane.showMessageDialog(contentPane,"Variable is not a number", "Error",JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					
 					if (rdbtnLl.isSelected()) {
-						System.out.println("LL");
 						try {
 							start(b1, b2, 0, nrest, ntabu,nvar);
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 					}else{
-						System.out.println("MDL");
 						try {
 							start(b1, b2, 1, nrest,ntabu,nvar);
 						} catch (IOException e1) {
@@ -224,10 +203,6 @@ public class mainpanel extends JFrame {
 		btnLaunch.setBounds(122, 227, 184, 23);
 		contentPane.add(btnLaunch);
 		
-
-		
-
-
 	}
 	
 
@@ -241,8 +216,9 @@ public class mainpanel extends JFrame {
 		NetInfo file = new Test();
 		((Train) teste).readTrain(train);	
 		((Test) file).readTest(test);
-		int i;
+		int i,j;
 		int Data[][] = teste.matrix_data;
+
 		int nr_rdm = restarts; 
 		String [] names = file.VariableNames;
 		
@@ -252,39 +228,42 @@ public class mainpanel extends JFrame {
 		}
 
 		int[] r = teste.vectorR;
-			
+		//System.out.println("1");
 		calcMDL scmdl = new calcMDL();
 		calcTeta tt = new calcTeta();
-		
+		//System.out.println("2");
 		int [][] mat1= new int[r.length][(r.length)/2];
 		double score_llmax, score_mdlmax;
 		List<double[]> tetas = new ArrayList<double[]>();
-		
+		//System.out.println("3");
 		mat1 = graph.createGrafo(Data, r, mode, nr_rdm, ntabu);
-		
+		//System.out.println("4");
 		score_llmax = scmdl.LL(Data, mat1, r);
-				
+//		System.out.println(score_llmax);
+		//System.out.println("5");
 		score_mdlmax = scmdl.MDL(Data, mat1, r);
-				
+		//System.out.println("6");		
 		long stopTime = System.currentTimeMillis();
 	    long elapsedTimeDBN = stopTime - startTime;
 	    
 	    startTime = System.currentTimeMillis();
 		tetas = tt.tetas(Data, mat1, r);
 		
-		int [] fut_values = new int [file.matrix_test.length];
+		int [][] fut_values = new int [file.matrix_test.length][r.length/2];
 		int var_to_guess = var; 
 		
 		infer guess = new infer();
 		
-		for(i=0; i< file.matrix_test.length; i++){
-			fut_values[i]= guess.inf (file.matrix_test, mat1, r , var_to_guess + r.length/2, tetas, i);
-			
-		}
-		for (i=0;i<file.matrix_test.length;i++){
-			
-			System.out.print(fut_values[i] + " ");
-			
+		if (var_to_guess == -1) {
+			for (j = 0; j < r.length / 2; j++) {
+				for (i = 0; i < file.matrix_test.length; i++) {
+					fut_values[i][j] = guess.inf(file.matrix_test, mat1, r, j+ r.length / 2, tetas, i);
+				}
+			}
+		} else {
+			for (i = 0; i < file.matrix_test.length; i++) {
+				fut_values[i][0] = guess.inf(file.matrix_test, mat1, r,var_to_guess + r.length / 2, tetas, i);
+			}
 		}
 		
 		System.out.println();
@@ -304,10 +283,9 @@ public class mainpanel extends JFrame {
 	    			+"\n Inferred with DN: "+elapsedTimeInfer+" ms"
 	    			,"Calculation Successful",JOptionPane.INFORMATION_MESSAGE);
 	    }
-	    showResults end = new showResults (mat1,r.length,score_mdlmax, score_llmax,names);
+	    showResults end = new showResults (mat1,r.length,score_mdlmax, score_llmax,names,fut_values,var);
 	    end.setVisible(true);
-
-	  
+  
 	    
 
 	   }
