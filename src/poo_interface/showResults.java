@@ -16,7 +16,16 @@ public class showResults extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	/** Creates a window, which will show the results of the executed program
+	 *  
+	 * @param BN matrix with the dynamic bayesian network
+	 * @param size twice the number of variables
+	 * @param sMDL score with MDL
+	 * @param sLL score with LL
+	 * @param names vector with names of the variables, in t and t+1
+	 * @param infer inferred values
+	 * @param var number of variables that the graph was inferred
+	 */
 	public showResults(int[][] BN, int size, double sMDL, double sLL,
 			String[] names, int[][] infer, int var) {
 		int i, j;
@@ -65,7 +74,6 @@ public class showResults extends JFrame {
 			p = j + size / 2;
 			textArea.append(names[p] + " : ");
 			comma = false;
-
 			for (i = size / 2; i < size; i++) {
 				if (BN[i][j] == 1) {
 					if (comma) {
@@ -93,9 +101,9 @@ public class showResults extends JFrame {
 			}
 
 		} else {
-			textArea.append("\n=== Inferred Values for variable" + names[var]);
+			textArea.append("\n=== Inferred Values for variable " + names[var]);
 			for (i = 0; i < infer.length; i++) {
-				textArea.append("Inferred Value for " + i + " : " + infer[i][0]);
+				textArea.append("\nInferred Value for " + i + " : " + infer[i][0]);
 
 			}
 		}

@@ -6,8 +6,13 @@ public class REQ {
 	private Stack<Integer> stack;
 	
 	public long time;
-	
 	int row,col;
+	/** Checks if the son of the given graph, as already 3 parents
+	 * 
+	 * @param graph	matrix with the graph that will be analyze
+	 * @param son node that will be analyze
+	 * @return returns 1, if son has three parents; returns 0 if has less
+	 */
 	public boolean GetParents(int [][] graph, int son) {
 		int i, count=0;
 		row=graph.length;
@@ -21,7 +26,12 @@ public class REQ {
 			}
 		return false;
 	}
-
+	/** Checks if the given graph is cycle or not
+	 * 
+	 * @param matrix matrix with the graph that will be analyze
+	 * @param start node where the program will start to run
+	 * @return returns 1, if graph is cycle; returns 0 otherwise
+	 */
 	public boolean FindCycle(int[][] matrix, int start) {
 		stack = new Stack<Integer>();
 		

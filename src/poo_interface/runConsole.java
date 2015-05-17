@@ -14,7 +14,12 @@ import Grafo.grafo;
 import Inference.infer;
 
 public class runConsole {
-
+	/** Method that from the input console fields, gets the necessary values to execute
+	 * the program
+	 * 
+	 * @param args vector of strings with the arguments obtained from the console 
+	 * @throws IOException
+	 */
 	public runConsole(String args[]) throws IOException {
 		String test, train, dir;
 		int nrest = Integer.parseInt(args[3]);

@@ -8,7 +8,10 @@ import javax.swing.UIManager;
 public class Main {
 
 	public static void main(String[] args) {
-
+		/** Main is only used to check if the program is needed to run in the console
+		 * or in the interface
+		 * 
+		 */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				if (args[0].equals("-gui")){

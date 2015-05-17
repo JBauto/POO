@@ -31,9 +31,7 @@ import Inference.infer;
 
 public class runGUI extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private String b1, b2;
@@ -43,7 +41,10 @@ public class runGUI extends JFrame {
 	private JTextField textField;
 	private JTextField textField_2;
 
-	
+	/**Construtor that initializes the interface, that will get the necessary values 
+	 * to run the program
+	 * 
+	 */
 	public runGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -66,7 +67,7 @@ public class runGUI extends JFrame {
 				browse frame1 = new browse();
 				b1 = frame1.filepath;
 				label_1.setText(b1);
-				n1 = true;
+				n1 = frame1.gotfile;
 			}
 		});
 		contentPane.setLayout(null);
@@ -78,7 +79,7 @@ public class runGUI extends JFrame {
 				browse frame2 = new browse();
 				b2 = frame2.filepath;
 				label.setText(b2);
-				n2 = true;
+				n2 = frame2.gotfile;
 			}
 		});
 		button.setBounds(299, 180, 125, 23);
@@ -133,7 +134,7 @@ public class runGUI extends JFrame {
 		rdbtnMdl.setBounds(20, 121, 109, 23);
 		contentPane.add(rdbtnMdl);
 
-		final JRadioButton rdbtnLl = new JRadioButton("LL");
+		JRadioButton rdbtnLl = new JRadioButton("LL");
 		rdbtnLl.setToolTipText("Log-Likelihood");
 		rdbtnLl.setBounds(20, 144, 109, 23);
 		contentPane.add(rdbtnLl);
@@ -205,7 +206,16 @@ public class runGUI extends JFrame {
 		
 	}
 	
-
+	/** Method that will run the program
+	 * 
+	 * @param train full path of the chosen train file
+	 * @param test full path of the chosen test file
+	 * @param mode integer that has the chosen mode to run, MDL or LL
+	 * @param restarts integer that has the number of restarts to execute
+	 * @param ntabu integer that has the number of tabu to run
+	 * @param var integer that has the variable to infer
+	 * 
+	 */
 	private void start(String train, String test, int mode, int restarts, int ntabu, int var)throws IOException {
 
 
