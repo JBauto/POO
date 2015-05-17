@@ -84,7 +84,7 @@ public class showResults extends JFrame {
 		textArea.append("\nMDL Score : " + sMDL + "\n");
 
 		
-
+		
 		if (var == -1) {
 			textArea.append("\n=== Inferred Values of all variables");
 			for (i = 0; i < size / 2; i++) {
@@ -101,6 +101,7 @@ public class showResults extends JFrame {
 
 			}
 		}
+		
 		contentPane.add(sp, gbc_textArea_1);
 
 		;

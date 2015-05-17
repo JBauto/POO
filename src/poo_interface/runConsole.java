@@ -91,7 +91,7 @@ public class runConsole {
 
 		int[][] fut_values = new int[file.matrix_test.length][r.length / 2];
 		int var_to_guess = var;
-
+		/*
 		infer guess = new infer();
 		if (var_to_guess == -1) {
 			for (j = 0; j < r.length / 2; j++) {
@@ -105,6 +105,7 @@ public class runConsole {
 						var_to_guess + r.length / 2, tetas, i);
 			}
 		}
+		*/
 		stopTime = System.currentTimeMillis();
 		long elapsedTimeInfer = stopTime - startTime;
 

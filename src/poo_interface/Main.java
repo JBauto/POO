@@ -11,24 +11,25 @@ public class Main {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				if (args[0].equals("-gui")){
-					try {
-						UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-						runGUI frame = new runGUI();
-						frame.setVisible(true);
-						frame.setResizable(false);
-					} catch (Exception e) {
-						e.printStackTrace();
+				if(args.length != 0){
+					if (args[0].equals("-gui")){
+						try {
+							UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+							runGUI frame = new runGUI();
+							frame.setVisible(true);
+							frame.setResizable(false);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
-				}else{
-					try {
-						@SuppressWarnings("unused")
-						runConsole runner = new runConsole(args);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}	
-				
+					}else{
+						try {
+							@SuppressWarnings("unused")
+							runConsole runner = new runConsole(args);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}	
 			}
 		});
 	}

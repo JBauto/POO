@@ -37,13 +37,13 @@ public class operations {
 	
 	public int [][] remove(int [][] mat_adj, int parent, int son){
 		
+		int [][] mat_adj_ini = new int [mat_adj.length][mat_adj[0].length];
+		for(int i =0; i<mat_adj.length;i++){
+			int[] aMatrix = mat_adj[i];
+			System.arraycopy(aMatrix, 0, mat_adj_ini[i], 0, mat_adj[0].length);
+		}
 
-		if (mat_adj[parent][son]==1){
-			int [][] mat_adj_ini = new int [mat_adj.length][mat_adj[0].length];
-			for(int i =0; i<mat_adj.length;i++){
-				int[] aMatrix = mat_adj[i];
-				System.arraycopy(aMatrix, 0, mat_adj_ini[i], 0, mat_adj[0].length);
-			}
+		if (mat_adj[parent][son]==1){			
 			mat_adj_ini[parent][son]=0;
 			return mat_adj_ini;
 		}else {
@@ -53,20 +53,23 @@ public class operations {
 	}
 	
 	public int [][] flip(int [][] mat_adj, int parent, int son){
-		int n = (mat_adj.length)/2;
 		
+		int n = (mat_adj.length)/2;		
 		
+		if (parent-n<0)return mat_adj;	
+		if (mat_adj[parent][son]==0) return mat_adj;
+					
 		if(req.GetParents(mat_adj, parent-n)) return mat_adj;//ve se o pai ja tem 3 pais
 		
 		int [][] mat_adj_ini = new int [mat_adj.length][mat_adj[0].length];
 		int [][] mat_cycle = new int [mat_adj.length][mat_adj[0].length];
 		
+		for(int i =0; i<mat_adj.length;i++){
+			int[] aMatrix = mat_adj[i];
+			System.arraycopy(aMatrix, 0, mat_adj_ini[i], 0, mat_adj[0].length);
+		}	
 
-		if (mat_adj[parent][son]==1) {
-			for(int i =0; i<mat_adj.length;i++){
-				int[] aMatrix = mat_adj[i];
-				System.arraycopy(aMatrix, 0, mat_adj_ini[i], 0, mat_adj[0].length);
-			}			
+		if (mat_adj[parent][son]==1) {		
 			mat_adj_ini[son+n][parent-n]=1;
 			mat_adj_ini[parent][son]=0;
 		}
