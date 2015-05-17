@@ -14,7 +14,9 @@ import java.awt.Font;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -258,6 +260,11 @@ public class runGUI extends JFrame {
 	    
 	    startTime = System.currentTimeMillis();
 		tetas = tt.tetas(Data, mat1, r);
+		
+		/*for(int a=0;a<mat1.length;a++){
+			if(a==mat1.length/2) System.out.println();
+			System.out.println(Arrays.toString(mat1[a]));
+		}*/
 		
 		int [][] fut_values = new int [file.matrix_test.length][r.length/2];
 		int var_to_guess = var; 

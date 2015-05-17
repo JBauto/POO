@@ -51,16 +51,16 @@ public class showResults extends JFrame {
 		gbc_textArea_1.gridy = 0;
 
 		textArea.append("=== Inter-slice connectivity \n");
-		for (i = 0; i < size / 2; i++) {
-			p = i + size / 2;
+		for (j = 0; j < size / 2; j++) {
+			p = j + size / 2;
 			textArea.append(names[p] + " : ");
 			comma = false;
-			for (j = 0; j < size / 2; j++) {
+			for (i = size / 2; i < size; i++) {
 				if (BN[i][j] == 1) {
 					if (comma) {
-						textArea.append(", " + names[j]);
+						textArea.append(", " + names[i]);
 					} else {
-						textArea.append(names[j]);
+						textArea.append(names[i]);
 						comma = true;
 					}
 
@@ -68,13 +68,15 @@ public class showResults extends JFrame {
 			}
 			textArea.append("\n");
 		}
+		
 		textArea.append("\n");
 		textArea.append("=== Intra-slice connectivity \n");
+		
 		for (j = 0; j < size / 2; j++) {
 			p = j + size / 2;
 			textArea.append(names[p] + " : ");
 			comma = false;
-			for (i = size / 2; i < size; i++) {
+			for (i = 0; i < size / 2; i++) {
 				if (BN[i][j] == 1) {
 					if (comma) {
 						textArea.append(", " + names[i]);
@@ -93,17 +95,17 @@ public class showResults extends JFrame {
 
 		if (var == -1) {
 			textArea.append("\n=== Inferred Values of all variables");
-			for (i = 0; i < infer.length; i++) {
+			for (i = 0; i < size / 2; i++) {
 				textArea.append("\nInferred Value for " + i + " : ");
-				for (j = 0; j < size / 2; j++) {
-					textArea.append(infer[i][j] + ", ");
+				for (j = 0; j < infer.length ; j++) {
+					textArea.append(infer[j][i] + ", ");
 				}
 			}
 
 		} else {
-			textArea.append("\n=== Inferred Values for variable " + names[var]);
+			textArea.append("\n=== Inferred Values for variable" + names[var]);
 			for (i = 0; i < infer.length; i++) {
-				textArea.append("\nInferred Value for " + i + " : " + infer[i][0]);
+				textArea.append("Inferred Value for " + i + " : " + infer[i][0]);
 
 			}
 		}
