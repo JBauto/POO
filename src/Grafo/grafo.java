@@ -110,7 +110,7 @@ public class grafo {
 						 // pode ser melhor um do while por causa do 1� caso
 				
 				double score_viz_max=scmdl.LL(Data, mat_adj_vizm, r);
-				//System.out.println(score_max);
+				System.out.println(score_max);
 
 				@SuppressWarnings("unused")
 				int score_op = 0;

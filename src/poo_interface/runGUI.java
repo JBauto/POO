@@ -254,6 +254,11 @@ public class runGUI extends JFrame {
 		int [][] fut_values = new int [file.matrix_test.length][r.length/2];
 		int var_to_guess = var; 
 		
+		for(int lll=0; lll<mat1.length; lll++){
+			if(lll==mat1.length/2)System.out.println();
+			System.out.println(Arrays.toString(mat1[lll]));
+		}
+		
 		infer guess = new infer();
 		
 		if (var_to_guess == -1) {

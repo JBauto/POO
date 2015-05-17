@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
