@@ -164,19 +164,20 @@ public class runConsole {
 		System.out.print("LL Score : " + score_llmax);
 
 		System.out.println("\nMDL Score : " + score_mdlmax);
+
 		if (var == -1) {
 			System.out.print("\n=== Inferred Values of all variables");
-			for (i = 0; i < file.matrix_test.length; i++) {
+			for (i = 0; i < r.length / 2 ; i++) {
 				System.out.print("\nInferred Value for " + i + " : ");
-				for (j = 0; j < r.length / 2; j++) {
-					System.out.print(fut_values[i][j] + ", ");
+				for (j = 0; j <file.matrix_test.length; j++) {
+					System.out.print(fut_values[j][i] + ", ");
 				}
 			}
 
 		} else {
 			System.out.print("\n=== Inferred Values for variable" + names[var]);
-			for (i = 0; i < file.matrix_test.length; i++) {
-				System.out.println("Inferred Value for " + i + " : "+ fut_values[i][0]);
+			for (j = 0; j < file.matrix_test.length; j++) {
+				System.out.println("Inferred Value for " + j + " : "+ fut_values[j][0]);
 
 			}
 		}

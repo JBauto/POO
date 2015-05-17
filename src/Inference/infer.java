@@ -11,20 +11,30 @@ import Calc.*;
 public class infer {
 
 	public int composeJ (int [] r, List <Integer> index_parents, List <Integer> j_values){ //parents_value tem o valor dos pais ordenados de ordem decrescente de acordo com o indice dos mesmos
-		int j=0;
-		if(index_parents.size()==1)return j;
+		int j=0,nr_parents,i;
+		nr_parents=index_parents.size()-1;
 		
+		if(nr_parents==0)return j;
+		
+		i=nr_parents-1;
+		/*
 		Iterator<Integer> it = j_values.iterator();
 		j=it.next();
-		
+		*/
+		j=j_values.get(nr_parents-1);
+		nr_parents--;
+		/*
 		Iterator<Integer> it2 = index_parents.iterator();
 		it2.next(); // para passar o primeiro e segundo
 		it2.next();
+		*/
 		
-		while (it.hasNext()){
+		while (nr_parents>0){
 		
-			j = j * r[it2.next()];
-			j=j+it.next();
+			j = j * r[index_parents.get(i)];
+			j=j+j_values.get(nr_parents-1);
+			i--;
+			nr_parents--;
 		}
 		
 		return j;

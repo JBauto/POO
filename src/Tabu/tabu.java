@@ -78,8 +78,7 @@ public class tabu {
 					//System.out.println("(i,j) = "+i+","+j+" ainda com "+values[2] +" tentativas");
 					return true; // nao tenta a opera��o
 				}else{
-					values[2] = retries_intra;
-					op_list.set(k,values);
+					it.remove();
 					return false; // pode tentar a opera��o
 				}
 			}else{

@@ -83,12 +83,14 @@ public class showResults extends JFrame {
 		textArea.append("LL Score : " + sLL);
 		textArea.append("\nMDL Score : " + sMDL + "\n");
 
+		
+
 		if (var == -1) {
 			textArea.append("\n=== Inferred Values of all variables");
-			for (i = 0; i < infer.length; i++) {
+			for (i = 0; i < size / 2; i++) {
 				textArea.append("\nInferred Value for " + i + " : ");
-				for (j = 0; j < size / 2; j++) {
-					textArea.append(infer[i][j] + ", ");
+				for (j = 0; j < infer.length ; j++) {
+					textArea.append(infer[j][i] + ", ");
 				}
 			}
 

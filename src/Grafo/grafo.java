@@ -1,6 +1,9 @@
 package Grafo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import Tabu.tabu;
@@ -15,6 +18,21 @@ public class grafo {
 	int [][] mat_equals;
 	double score_max, score_test,score_MAX;
 	
+	private boolean check_coord(List<int[]> list, int coord_i, int coord_j){
+		
+		for(Iterator<int[]> it = list.iterator(); it.hasNext();){
+			int[] tmp = it.next();
+			if(tmp[0] == coord_i && tmp[1] == coord_j)
+				return false;
+		}
+		
+		int coord[] = new int[2];
+		coord[0] = coord_i;
+		coord[1] = coord_j;
+		list.add(coord);
+		
+		return true;
+	}
 	
 	public int [][] createGrafo (int [][] Data, int [] r, int type_score, int nr_rdm, int tries){ //type_score==0 --> LL, type_score==1 --> MDL
 		int i, j, rdm, sum_rdm, mat_rdm=0;
@@ -30,39 +48,54 @@ public class grafo {
 		boolean test_equals = false;
 		REQ req = new REQ ();
 		Random rand = new Random();
+		Random coord = new Random();
 		int best_i = -1, best_j = -1;
 		calcMDL scmdl = new calcMDL();
 		
+		int parents_teste [] = new int[r.length/2];
+
+		for(int m = 0;m<parents_teste.length;m++)
+			parents_teste[m] = 3;
+		
 		while(true){
 			
-			int k=0;
+			int b=0;
+			int counter = rand.nextInt(3*(r.length/2));
+			int parents[] = new int[r.length/2];
 				//System.out.println(r.length);	
 			mat_adj_max = new int[r.length][(r.length)/2];
-			for (j=0;j<mat_adj_max[0].length ;j++){
-				sum_rdm=0;
-				for(i=0;i<mat_adj_max.length ;i++){
-					rdm = rand.nextInt(2);
-					mat_adj_max[i][j]= rdm;
-					sum_rdm = sum_rdm + rdm;
-					if(sum_rdm==3)break;
-				}
-			}
 			
-			for( i =0; i<mat_adj_max.length;i++){
+			List<int[]> used_i = new ArrayList<int[]>();
+			
+			while(counter!=0){
+				int teste_i = coord.nextInt(r.length);
+				int teste_j = coord.nextInt(r.length/2);
+				
+				if(parents[teste_j] == 3) continue;
+				else{
+					if(this.check_coord(used_i, teste_i, teste_j)){
+						mat_adj_max[teste_i][teste_j] = 1;
+						parents[teste_j]++;
+						counter--;
+					}
+				}
+			}			
+			
+			for( i = 0; i<mat_adj_max.length;i++){
 				int[] aMatrix = mat_adj_max[i];
 				System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);		
 			}
-			 if ( req.GetParents(mat_cycle, 0) ) k=0;
+			 if ( req.GetParents(mat_cycle, 0) ) b=0;
 
 			 for( i = 0; i<mat_adj_max.length;i++){
 
-				 if (req.FindCycle(mat_cycle,i)) k++;
+				 if (req.FindCycle(mat_cycle,i)) b++;
 
 			}
-			if (k==0) 	break;
+			if (b==0) 	break;
 			
 		}
-
+				
 //		System.out.println("Starting...");
 		if(type_score==0){
 
@@ -170,45 +203,50 @@ public class grafo {
 						}
 					}
 					if(mat_rdm<nr_rdm){
-						
+						System.out.println(mat_rdm);
 						while(true){
 							
-							int k=0;
-							mat_adj_max= new int[r.length][(r.length)/2];
-							for (j=0;j<mat_adj_max[0].length ;j++){
-								sum_rdm=0;
-								for(i=0;i<mat_adj_max.length ;i++){
-									rdm = rand.nextInt(2);
-									mat_adj_max[i][j]= rdm;
-									sum_rdm = sum_rdm + rdm;
-									if(sum_rdm==3)break;
+							int b=0;
+							int counter = rand.nextInt(3*(r.length/2));
+							int parents[] = new int[r.length/2];
+								//System.out.println(r.length);	
+							mat_adj_max = new int[r.length][(r.length)/2];
+							
+							List<int[]> used_i = new ArrayList<int[]>();
+							
+							while(counter!=0){
+								int teste_i = coord.nextInt(r.length);
+								int teste_j = coord.nextInt(r.length/2);
+								
+								if(parents[teste_j] == 3) continue;
+								else{
+									if(this.check_coord(used_i, teste_i, teste_j)){
+										mat_adj_max[teste_i][teste_j] = 1;
+										parents[teste_j]++;
+										counter--;
+									}
 								}
-							}
-						
-							for( i =0; i<mat_adj_max.length;i++){
+							}			
+							
+							for( i = 0; i<mat_adj_max.length;i++){
 								int[] aMatrix = mat_adj_max[i];
-								System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);
+								System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);		
 							}
-							
-							if ( req.GetParents(mat_cycle, 0) ) k=0;
-							
-							for( i =0; i<mat_adj_max.length;i++){
-								 if(req.FindCycle(mat_cycle,i)) k++;
+							 if ( req.GetParents(mat_cycle, 0) ) b=0;
+
+							 for( i = 0; i<mat_adj_max.length;i++){
+
+								 if (req.FindCycle(mat_cycle,i)) b++;
+
 							}
-							
-							if (k==0) 	break;
+							if (b==0) 	break;
 							
 						}
-						
-						/*for (j=0;j<mat_adj_max[0].length ;j++){
-							for(i=0;i<mat_adj_max.length ;i++){
-								mat_adj_max[i][j]= 0;
-							}
-						}*/
 						
 						mat_adj_vizm = new int[r.length][(r.length)/2];
 						score_max=scmdl.LL(Data, mat_adj_vizm, r);
 						mat_rdm++;
+						tabu_list_LL = new tabu((tries/3)*3+3);
 					}else{
 						return mat_MAX;
 					}
@@ -310,35 +348,48 @@ public class grafo {
 						}
 					}
 					if(mat_rdm<nr_rdm){						
-						while(true){							
-							int k=0;
-							mat_adj_max= new int[r.length][(r.length)/2];
-							for (j=0;j<mat_adj_max[0].length ;j++){
-								sum_rdm=0;
-								for(i=0;i<mat_adj_max.length ;i++){
-									rdm = rand.nextInt(2);
-									mat_adj_max[i][j]= rdm;
-									sum_rdm = sum_rdm + rdm;
-									if(sum_rdm==3)break;
+						while(true){
+							
+							int b=0;
+							int counter = rand.nextInt(3*(r.length/2));
+							int parents[] = new int[r.length/2];
+								//System.out.println(r.length);	
+							mat_adj_max = new int[r.length][(r.length)/2];
+							
+							List<int[]> used_i = new ArrayList<int[]>();
+							
+							while(counter!=0){
+								int teste_i = coord.nextInt(r.length);
+								int teste_j = coord.nextInt(r.length/2);
+								
+								if(parents[teste_j] == 3) continue;
+								else{
+									if(this.check_coord(used_i, teste_i, teste_j)){
+										mat_adj_max[teste_i][teste_j] = 1;
+										parents[teste_j]++;
+										counter--;
+									}
 								}
-							}
-						
-							for( i =0; i<mat_adj_max.length;i++){
+							}			
+							
+							for( i = 0; i<mat_adj_max.length;i++){
 								int[] aMatrix = mat_adj_max[i];
-								System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);
+								System.arraycopy(aMatrix, 0, mat_cycle[i], 0, mat_adj_max[0].length);		
 							}
-							if ( req.GetParents(mat_cycle, 0) ) k=0;
-							for( i =0; i<mat_adj_max.length;i++){
-								 if (  req.FindCycle(mat_cycle,i)) k++;
+							 if ( req.GetParents(mat_cycle, 0) ) b=0;
+
+							 for( i = 0; i<mat_adj_max.length;i++){
+
+								 if (req.FindCycle(mat_cycle,i)) b++;
 
 							}
-							
-							if (k==0) 	break;
+							if (b==0) 	break;
 							
 						}
 						mat_adj_vizm = new int[r.length][(r.length)/2];
 						score_max=scmdl.MDL(Data, mat_adj_vizm, r);
 						mat_rdm++;
+						tabu_list_MDL = new tabu((tries/3)*3+3);
 					}else
 						return mat_MAX;
 				}
