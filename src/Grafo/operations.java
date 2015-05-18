@@ -6,8 +6,14 @@ public class operations {
 	
 
 	REQ req = new REQ ();
-	
-	public int [][] add(int [][] mat_adj, int parent, int son){
+	/** add adds a connection between parent and son, if possible.
+	 * 
+	 * @param mat_adj matrix with the current configuration of connections 
+	 * @param parent parent index 
+	 * @param son son index
+	 * @return int[][] resulting matrix with the new configuration if any connection was added
+	 */
+	int [][] add(int [][] mat_adj, int parent, int son){
 		
 		if(req.GetParents(mat_adj, son)) return mat_adj; //ve se o filho ja tem 3 pais
 		
@@ -34,8 +40,14 @@ public class operations {
 		
 		return mat_adj_ini;
 	}
-	
-	public int [][] remove(int [][] mat_adj, int parent, int son){
+	/** remove removes a connection between parent and son, if possible.
+	 * 
+	 * @param mat_adj matrix with the current configuration of connections 
+	 * @param parent parent index 
+	 * @param son son index
+	 * @return int[][] resulting matrix with the new configuration if any connection was removed
+	 */
+	int [][] remove(int [][] mat_adj, int parent, int son){
 		
 
 		if (mat_adj[parent][son]==1){
@@ -51,8 +63,14 @@ public class operations {
 		}
 					
 	}
-	
-	public int [][] flip(int [][] mat_adj, int parent, int son){
+	/** flip flips the connection between parent and son, if possible.
+	 * 
+	 * @param mat_adj matrix with the current configuration of connections 
+	 * @param parent parent index 
+	 * @param son son index
+	 * @return int[][] resulting matrix with the new configuration if any connection was changed
+	 */
+	int [][] flip(int [][] mat_adj, int parent, int son){
 		int n = (mat_adj.length)/2;
 		
 		

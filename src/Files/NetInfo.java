@@ -32,7 +32,7 @@ public class NetInfo {
 	 * @param x the number variables of the train file
 	 * 
 	 */
-	public void createBN(Integer x){
+	void createBN(Integer x){
 		for(int i = 0 ;i<x; i++){
 			paired_data.add(new ArrayList<Integer>());
 		}
@@ -43,7 +43,7 @@ public class NetInfo {
 	 * @param col number of variables twice two 
 	 *
 	 */
-	public void createMatrix(int lines, int col){
+	void createMatrix(int lines, int col){
 		matrix_data = new int [lines][col];
 	}
 	
@@ -53,7 +53,7 @@ public class NetInfo {
 	 * @param col number of variables of the file test
 	 * 
 	 */
-	public void createTest(int lines,int col){
+	void createTest(int lines,int col){
 		matrix_test = new int[lines][col];
 	}
 	
@@ -62,7 +62,7 @@ public class NetInfo {
 	 * @param x number of variables 
 	 * 
 	 */
-	public void createRvector(Integer x){
+	void createRvector(Integer x){
 		vectorR = new int[2*x];
 		for(int i = 0; i<2*x; i++)
 			vectorR[i] = 0;
@@ -74,14 +74,14 @@ public class NetInfo {
 	 * @param index number of variables 
 	 * 
 	 */
-	public void calculateR(int x,int index){
+	void calculateR(int x,int index){
 		if(vectorR[index] < x){
 			vectorR[index] = x + 1;
 			vectorR[number_var+index] = x + 1;
 		}
 	}
 	
-	public void nodeNames(String line){
+	void nodeNames(String line){
 		String[] tmp = line.split(",");
 		VariableNames = new String[tmp.length*2];
 		for(int i = 0; i<tmp.length;i++){

@@ -12,7 +12,6 @@ import java.awt.GridBagConstraints;
 public class showResults extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
 	private JPanel contentPane;
 	/** Creates a window, which will show the results of the executed program
 	 *  
@@ -65,10 +64,10 @@ public class showResults extends JFrame {
 			}
 			textArea.append("\n");
 		}
-
 		
 		textArea.append("\n");
 		textArea.append("=== Intra-slice connectivity \n");
+		
 		for (j = 0; j < size / 2; j++) {
 			p = j + size / 2;
 			textArea.append(names[p] + " : ");

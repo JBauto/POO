@@ -36,8 +36,8 @@ public class runConsole {
 					nrest = Integer.parseInt(args[3]);
 				}else{
 					System.out.println("Warning: An invalid number of restarts was entered. Program will run by default with zero restarts.");
-					ntabu = 0;
 				}
+				ntabu = 0;
 				var = -1;
 			}else{
 				if (args.length == 5){
@@ -74,7 +74,7 @@ public class runConsole {
 				Executer starter;
 				try {
 					starter = new Executer();
-					starter.run(train, test, 1, nrest, ntabu, var);
+					starter.run(train, test, 0, nrest, ntabu, var);
 					results(starter);
 				} catch (InvalidVar e) {
 					System.out.println("Variable to infer doesn't exist");

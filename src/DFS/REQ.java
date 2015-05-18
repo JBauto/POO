@@ -6,7 +6,7 @@ public class REQ {
 	private Stack<Integer> stack;
 	
 	public long time;
-	int row,col;
+	private int row,col;
 	/** Checks if the son of the given graph, as already 3 parents
 	 * 
 	 * @param graph	matrix with the graph that will be analyze

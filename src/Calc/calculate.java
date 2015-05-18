@@ -7,7 +7,15 @@ import java.util.List;
 
 public class calculate {
 
-
+	/** indexesToCompare provides the indexes of the variable being evaluated and his parents, if any.
+	 * In the first index we have the son and then the parents in descending order.
+	 * Ex.: if variable 3, has as parents the variables 1, 4 and 7 -> indexesToCompare = [2 6 3 0]
+	 * 
+	 * @param mat_adj contains the connections between the variables in t and t+1
+	 * @param ind_son is the index of the variable in t+1 being evaluated
+	 * @param n contains the number of variables in t
+	 * @return list of integers with the indexes of a variable and his parents
+	 */
 	public List<Integer>  indexesToCompare (int [][] mat_adj, int ind_son, int n){ // o primeiro valor � o seu index, e os outros v�m por ordem inversa, ou seja, se o elemento 2 tem como pai 3 e 5, devolve: 1 4 2
 		int i;
 		List<Integer> ind_parents = new ArrayList<Integer>();
@@ -25,23 +33,29 @@ public class calculate {
 		
 	}
 	
-	public int getq (List<Integer> ind_parents, int [] r){ // assume que j pode ser zero, ou seja, se houver 2 possibilidades fica j=0 ou j=1 (como no exemplo dos apontamentos), e nao j=1 ou j=2 (como no exemplo do enunciado)
-		int j=0,i = 0, ji;
+
+	/** getq provides the maximum number of possible parent combinations of a specific variable (present in the first index of 
+	 * ind_parents).
+	 * 
+	 * @param index_parents is a list that contains the indexes of a specific node and his parents
+	 * @param r contains the number of values each variable can take 
+	 * @return integer representing the number of possible parent configurations
+	 */
+	int getq (List<Integer> ind_parents, int [] r){ 
+		int j=0, ji;
 		
-		if(ind_parents.size()==1)return j; //nao tem pais
+		if(ind_parents.size()==1)return j; 
 		
-		j=r[ind_parents.get(1)]-1;// o indice ta ao contrario (come�a pelo ultimo pai) mas j final, que � o que interessa, deve ser igual independentemente da ordem
-		
+		j=r[ind_parents.get(1)]-1;
 		Iterator<Integer> it = ind_parents.iterator();
-		Iterator<Integer> it2;
+		//Iterator<Integer> it2;
 		
-		do{ 
+		
 			it.next();
-			i++;
-		}while(i<2);
+			it.next();
 		
-		for(it2=it;it2.hasNext();){ //passa o primeiro da lista que � ele proprio, ver apontamentos da professora		
-			int poss_parent = it2.next();
+		for(;it.hasNext();){	
+			int poss_parent = it.next();
 			ji=(j+1)*(r[poss_parent]-1);
 			j=j+ji;
 		}
@@ -49,7 +63,16 @@ public class calculate {
 		return j;
 	}
 	
-	public List<Integer>  valuesToCompare (int [] r, int j, int k, List<Integer> ind_parents ){ 
+	/** valuesToCompare calculates the values of the node being evaluated and his parents, by decomposing the parameter j.
+	 * The order in which the values of the parents are returned is in decreasing order according to their indexes, being compatible 
+	 * with indexesToCompare.
+	 * 
+	 * @param r contains the number of values each variable can take 
+	 * @param j configuration of parents, to be decomposed in this method
+	 * @param k value of the variable being evaluated
+	 * @return list of integers with the values of a variable and his parents
+	 */
+	List<Integer>  valuesToCompare (int [] r, int j, int k, List<Integer> ind_parents ){ 
 		List<Integer> values = new ArrayList<Integer>();  
 		int nr_parents =ind_parents.size() -1;
 		int l = 1;
@@ -63,7 +86,7 @@ public class calculate {
 		int poss_parent = it.next();
 		Iterator<Integer> it2;
 		
-		for(it2 = it;l<nr_parents;l++){ // quanto temos j e queremos j1, j2 etc, ver apontamentos da professora, mete primeiro o do ultimo pai
+		for(it2 = it;l<nr_parents;l++){ 
 			poss_parent = it2.next();
 			values.add(j%r[poss_parent]);
 			j=(j-(j%r[poss_parent]))/(r[poss_parent]);
@@ -74,7 +97,15 @@ public class calculate {
 		return values;
 	}
 	
-	public double countNijk (int [][] Data, List<Integer> index_compare, List<Integer> values_compare){
+	/** countNijk counts the number of times a specific set of numbers, those being the values of a node and his parents, is present 
+	 * in a certain Data in the correct position.
+	 * 
+	 * @param Data which contains the values from which the Nijk is going to calculated
+	 * @param index_parents is a list that contains the indexes of a specific node and his parents
+	 * @param values_compare contains the values of a specific node and his parents
+	 * @return integer with the number of times the set of numbers received, in the respective position, is present in Data
+	 */
+	double countNijk (int [][] Data, List<Integer> index_compare, List<Integer> values_compare){
 		int  i, equal;
 		double Nijk=0;
 		for(i=0; i< Data.length; i++){

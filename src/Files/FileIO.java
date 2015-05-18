@@ -10,7 +10,7 @@ public class FileIO {
 	 * @param s	string that contains the full path of the file
 	 * @return returns the number of lines of the file
 	 */
-	public int numberLine(String s) throws IOException{
+	int numberLine(String s) throws IOException{
 		BufferedReader reader = new BufferedReader(new FileReader(s));
 		int lines = 0;
 		while (reader.readLine() != null) lines++;
@@ -22,7 +22,7 @@ public class FileIO {
 	 * @param file string that contains the full path of the file
 	 * @return returns a buffer br with the data read from the file
 	 */
-	public BufferedReader openFile(String file) throws IOException{
+	BufferedReader openFile(String file) throws IOException{
 //		File dir = new File(".");
 //		File fin = new File(dir.getCanonicalPath() + File.separator + file);
 		BufferedReader br = new BufferedReader(new FileReader(file));
@@ -33,7 +33,7 @@ public class FileIO {
 	 * @param br buffer with the data to read
 	 * @return return a string with the line that was read
 	 */
-	public String readLine(BufferedReader br) throws IOException{
+	String readLine(BufferedReader br) throws IOException{
 		String line = null;		
 		line = br.readLine();
 		return line;

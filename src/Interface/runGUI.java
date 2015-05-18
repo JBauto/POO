@@ -156,6 +156,7 @@ public class runGUI extends JFrame {
 						return;
 					}
 					try{
+						
 						ntabu=Integer.parseInt(textField.getText());
 					}catch (NumberFormatException NotANumber){
 						JOptionPane.showMessageDialog(contentPane,"Total tries not a number", "Error",JOptionPane.ERROR_MESSAGE);
@@ -184,7 +185,7 @@ public class runGUI extends JFrame {
 					}else{
 						try {
 							Executer starter = new Executer();
-							starter.run(train, test, 0, nrest, ntabu,nvar);
+							starter.run(train, test, 1, nrest, ntabu,nvar);
 						    results(starter);
 						} catch (IOException e1) {
 						} catch (InvalidVar e1) {

@@ -8,6 +8,15 @@ public class calcTeta  {
 
 	calculate calc = new calculate();
 	
+	/** tetas provides the list containing arrays of doubles with values of "teta" to all possible combinations for a specific graph 
+	 * and received Data.
+	 * Each "teta" represents the probability of a variable have a certain value given the specific configuration of their parents.
+	 * 
+	 * @param Data which contains the values from which the "teta" is going to be calculated
+	 * @param mat_adj contains the connections between the variables in t and t+1
+	 * @param r contains the number of values each variable can take 
+	 * @return list of arrays of doubles each array having all the possible "teta"'s of a certain variable 
+	 */
 	public List<double[]> tetas(int [][] Data, int [][] mat_adj, int [] r){
 		int i, j, n, k, t, l;
 		double Nij, Nijk;
@@ -50,7 +59,13 @@ public class calcTeta  {
 		return nodes;
 	}
 	
-	public int lengthTeta(List<Integer> index_parents, int [] r){
+	/** lengthTeta calculates the length of the array of "teta" to a specific variable in order to create that array
+	 * 
+	 * @param index_parents is a list that contains the indexes of a specific node and his parents
+	 * @param r contains the number of values each variable can take 
+	 * @return integer with the length to be used to create the array
+	 */
+	private int lengthTeta(List<Integer> index_parents, int [] r){
 		int l=r[index_parents.get(0)], i;
 		
 		for(i=1;i<index_parents.size();i++){

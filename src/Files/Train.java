@@ -14,7 +14,7 @@ public class Train extends NetInfo{
 	private int time_samples;
 	int number_lines;
 		
-	public void setParameters(String line){
+	private void setParameters(String line){
 		int i = 0;
 		String[] parts;
 		String[] var_name;
@@ -52,7 +52,7 @@ public class Train extends NetInfo{
 		}
 	}
 	
-	public void printvectorR(){
+	void printvectorR(){
 		System.out.println(Arrays.toString(vectorR));
 	}
 	

@@ -10,6 +10,13 @@ public class calcLL  {
 	long time = 0;
 	calculate calc = new calculate();
 
+	/** LL provides the score of a given graph using the LL model 
+	 * 
+	 * @param Data which contains the values from which the score is going to be calculated
+	 * @param mat_adj contains the connections between the variables in t and t+1
+	 * @param r contains the number of values each variable can take 
+	 * @return double with score using the LL model
+	 */
 	public double LL(int [][] Data, int [][] mat_adj, int [] r){
 		int i, j, n, k;
 		double Nij = 0, Nijk, score=0;
