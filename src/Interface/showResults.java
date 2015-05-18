@@ -11,10 +11,8 @@ import java.awt.GridBagConstraints;
 
 public class showResults extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 	/** Creates a window, which will show the results of the executed program
 	 *  
@@ -26,8 +24,7 @@ public class showResults extends JFrame {
 	 * @param infer inferred values
 	 * @param var number of variables that the graph was inferred
 	 */
-	public showResults(int[][] BN, int size, double sMDL, double sLL,
-			String[] names, int[][] infer, int var) {
+	public showResults(int[][] BN, int size, double sMDL, double sLL,String[] names, int[][] infer, int var) {
 		int i, j;
 		int p;
 		boolean comma;
@@ -55,7 +52,7 @@ public class showResults extends JFrame {
 			p = j + size / 2;
 			textArea.append(names[p] + " : ");
 			comma = false;
-			for (i = size / 2; i < size; i++) {
+			for (i = 0; i < size / 2; i++) {
 				if (BN[i][j] == 1) {
 					if (comma) {
 						textArea.append(", " + names[i]);
@@ -68,15 +65,15 @@ public class showResults extends JFrame {
 			}
 			textArea.append("\n");
 		}
+
 		
 		textArea.append("\n");
 		textArea.append("=== Intra-slice connectivity \n");
-		
 		for (j = 0; j < size / 2; j++) {
 			p = j + size / 2;
 			textArea.append(names[p] + " : ");
 			comma = false;
-			for (i = 0; i < size / 2; i++) {
+			for (i = size / 2; i < size; i++) {
 				if (BN[i][j] == 1) {
 					if (comma) {
 						textArea.append(", " + names[i]);
@@ -95,17 +92,23 @@ public class showResults extends JFrame {
 
 		if (var == -1) {
 			textArea.append("\n=== Inferred Values of all variables");
-			for (i = 0; i < size / 2; i++) {
-				textArea.append("\nInferred Value for " + i + " : ");
-				for (j = 0; j < infer.length ; j++) {
-					textArea.append(infer[j][i] + ", ");
+			for (i = 0; i < infer.length; i++) {
+				textArea.append("\nInferred Value for " + i + " :");
+				comma = false;
+				for (j = 0; j < size / 2 ; j++) {
+					if (comma){
+						textArea.append(", "+infer[i][j]);
+					}else{
+						textArea.append(" "+infer[i][j]);
+						comma=true;
+					}
 				}
 			}
 
 		} else {
-			textArea.append("\n=== Inferred Values for variable" + names[var]);
+			textArea.append("\n=== Inferred Values for variable " + names[var]);
 			for (i = 0; i < infer.length; i++) {
-				textArea.append("Inferred Value for " + i + " : " + infer[i][0]);
+				textArea.append("\nInferred Value for " + i + " : " + infer[i][0]);
 
 			}
 		}

@@ -1,4 +1,4 @@
-package poo_interface;
+package Interface;
 
 import java.awt.EventQueue;
 import java.io.IOException;

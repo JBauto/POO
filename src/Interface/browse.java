@@ -1,4 +1,4 @@
-package poo_interface;
+package Interface;
 
 import java.awt.BorderLayout;
 
@@ -11,9 +11,11 @@ import javax.swing.JFileChooser;
 
 public class browse extends JFrame {
 
+
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	public String filepath;
-	public boolean gotfile;
+	String filepath;
+	boolean gotfile;
 
 	/** Constructor that builds a window with a browser of files, that will set values
 	 * to the fields filepath (string with full path of the file chosen) and gotfile
