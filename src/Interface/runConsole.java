@@ -1,4 +1,4 @@
-package poo_interface;
+package Interface;
 
 import java.io.File;
 import java.io.IOException;

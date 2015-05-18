@@ -1,4 +1,4 @@
-package poo_interface;
+package Interface;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
