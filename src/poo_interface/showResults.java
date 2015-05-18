@@ -16,7 +16,16 @@ public class showResults extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	/** Creates a window, which will show the results of the executed program
+	 *  
+	 * @param BN matrix with the dynamic bayesian network
+	 * @param size twice the number of variables
+	 * @param sMDL score with MDL
+	 * @param sLL score with LL
+	 * @param names vector with names of the variables, in t and t+1
+	 * @param infer inferred values
+	 * @param var number of variables that the graph was inferred
+	 */
 	public showResults(int[][] BN, int size, double sMDL, double sLL,
 			String[] names, int[][] infer, int var) {
 		int i, j;
@@ -42,16 +51,16 @@ public class showResults extends JFrame {
 		gbc_textArea_1.gridy = 0;
 
 		textArea.append("=== Inter-slice connectivity \n");
-		for (i = 0; i < size / 2; i++) {
-			p = i + size / 2;
+		for (j = 0; j < size / 2; j++) {
+			p = j + size / 2;
 			textArea.append(names[p] + " : ");
 			comma = false;
-			for (j = 0; j < size / 2; j++) {
+			for (i = size / 2; i < size; i++) {
 				if (BN[i][j] == 1) {
 					if (comma) {
-						textArea.append(", " + names[j]);
+						textArea.append(", " + names[i]);
 					} else {
-						textArea.append(names[j]);
+						textArea.append(names[i]);
 						comma = true;
 					}
 
@@ -59,14 +68,15 @@ public class showResults extends JFrame {
 			}
 			textArea.append("\n");
 		}
+		
 		textArea.append("\n");
 		textArea.append("=== Intra-slice connectivity \n");
+		
 		for (j = 0; j < size / 2; j++) {
 			p = j + size / 2;
 			textArea.append(names[p] + " : ");
 			comma = false;
-
-			for (i = size / 2; i < size; i++) {
+			for (i = 0; i < size / 2; i++) {
 				if (BN[i][j] == 1) {
 					if (comma) {
 						textArea.append(", " + names[i]);
@@ -82,8 +92,6 @@ public class showResults extends JFrame {
 		textArea.append("\n=== Scores \n");
 		textArea.append("LL Score : " + sLL);
 		textArea.append("\nMDL Score : " + sMDL + "\n");
-
-		
 
 		if (var == -1) {
 			textArea.append("\n=== Inferred Values of all variables");

@@ -14,18 +14,48 @@ import Grafo.grafo;
 import Inference.infer;
 
 public class runConsole {
-
+	/** Method that from the input console fields, gets the necessary values to execute
+	 * the program
+	 * 
+	 * @param args vector of strings with the arguments obtained from the console 
+	 * @throws IOException
+	 */
 	public runConsole(String args[]) throws IOException {
+		//System.out.println("Too few arguments.");
+		//System.out.println("Usage: jar -jar <<JAR-NAME>>.jar <<TRAIN-NAME>>.csv <<TEST-NAME>>.csv <<MDL/LL>> <<NUMBER-OF-RANDOM-RESTARTS>> <<VAR-TO-INFER>> ");
+		//System.exit(-1);
+		
 		String test, train, dir;
-		int nrest = Integer.parseInt(args[3]);
-		int var;
+		int nrest = 0;
 		int ntabu = 0;
-		if (args.length == 4) {
-			var = -1;
-		} else {
-			var = Integer.parseInt(args[4]);
+		int var = -1;
+		if(args.length < 3){
+			System.out.println("Too few arguments.");
+			System.out.println("Usage: jar -jar <<JAR-NAME>>.jar <<TRAIN-NAME>>.csv <<TEST-NAME>>.csv <<MDL/LL>> <<NUMBER-OF-RANDOM-RESTARTS>> <<VAR-TO-INFER>> ");
+			System.exit(-1);
 		}
-
+		if(args.length == 3){
+			nrest = 0;
+		}else{
+			if(args.length == 4){
+				if(Integer.parseInt(args[3]) > -1){ 
+					nrest = Integer.parseInt(args[3]);
+				}else{
+					System.out.println("Warning: An invalid number of restarts was entered. Program will run by default with zero restarts.");
+					ntabu = 0;
+					var = -1;
+				}
+			}else{
+				if (args.length == 5){
+					var = Integer.parseInt(args[4]);
+				}else{
+					System.out.println("Too many arguments.");
+					System.out.println("Usage: jar -jar <<JAR-NAME>>.jar <<TRAIN-NAME>>.csv <<TEST-NAME>>.csv <<MDL/LL>> <<NUMBER-OF-RANDOM-RESTARTS>> <<VAR-TO-INFER>> ");
+					System.exit(-1);
+				}
+			}
+		}
+		
 		try {
 			dir = new File(".").getCanonicalPath();
 			train = new String(dir + File.separator + args[0]);
@@ -109,19 +139,20 @@ public class runConsole {
 		long elapsedTimeInfer = stopTime - startTime;
 
 		Runtime t = Runtime.getRuntime();
-		if (nr_rdm != 0) {
-			System.out.println("Memory used = "
+		File tr = new File(train);
+		File te = new File(test);
+		long time;
+		if(nr_rdm == 0){
+			time = elapsedTimeDBN;
+		}else{
+			time = elapsedTimeDBN/nr_rdm;
+		}
+		System.out.println("Parameters: "+tr.getName()+" "+te.getName()+" " + restarts +" "+ var +" " + "\nMemory used = "
 					+ (t.totalMemory() - t.freeMemory()) / 1024 + " kB"
 					+ "\nExecution Time : " + elapsedTimeDBN
-					+ " ms (Average of = " + (elapsedTimeDBN / nr_rdm) + " ms)"
+					+ " ms (Average of = " + (time) + " ms)"
 					+ "\nInferred with DN: " + elapsedTimeInfer + " ms");
-		} else {
-			System.out.println("Memory used = "
-					+ (t.totalMemory() - t.freeMemory()) / 1024 + " kB"
-					+ "\n Building DBN : " + elapsedTimeDBN
-					+ " ms (Average of = " + (elapsedTimeDBN) + " ms)"
-					+ "\n Inferred with DN: " + elapsedTimeInfer + " ms\n");
-		}
+		
 		
 		System.out.print("=== Inter-slice connectivity \n");
 		for (i = 0; i < r.length / 2; i++) {
@@ -164,20 +195,19 @@ public class runConsole {
 		System.out.print("LL Score : " + score_llmax);
 
 		System.out.println("\nMDL Score : " + score_mdlmax);
-
 		if (var == -1) {
 			System.out.print("\n=== Inferred Values of all variables");
-			for (i = 0; i < r.length / 2 ; i++) {
+			for (i = 0; i < file.matrix_test.length; i++) {
 				System.out.print("\nInferred Value for " + i + " : ");
-				for (j = 0; j <file.matrix_test.length; j++) {
-					System.out.print(fut_values[j][i] + ", ");
+				for (j = 0; j < r.length / 2; j++) {
+					System.out.print(fut_values[i][j] + ", ");
 				}
 			}
 
 		} else {
 			System.out.print("\n=== Inferred Values for variable" + names[var]);
-			for (j = 0; j < file.matrix_test.length; j++) {
-				System.out.println("Inferred Value for " + j + " : "+ fut_values[j][0]);
+			for (i = 0; i < file.matrix_test.length; i++) {
+				System.out.println("Inferred Value for " + i + " : "+ fut_values[i][0]);
 
 			}
 		}
